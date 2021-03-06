@@ -154,7 +154,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				3
+				delate part 
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
