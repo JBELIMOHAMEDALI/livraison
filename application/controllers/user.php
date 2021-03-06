@@ -1,6 +1,6 @@
-<?php 
-
-class User extends CI_Controller{
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+class User extends Admin_Controller {
 
 	public function __construct()
 	{
@@ -25,6 +25,12 @@ class User extends CI_Controller{
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
 
+	}
+
+	public function index_us()
+	{
+		$this->data['data_user'] = $this->model_users->getComondeUserData();
+		$this->render_template('index_user',$this->data);
 	}
 	public function generete_barCode()
 	{

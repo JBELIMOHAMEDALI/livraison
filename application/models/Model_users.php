@@ -29,4 +29,10 @@ class Model_users extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->num_rows();
 	}
+	public function getComondeUserData($id=1,$type="0")
+	{
+		$sql="select c.* from users u join commande c on u.id_user=c.id_user where u.id_user= ".$id." and c.status ='".$type."'";
+		$query = $this->db->query($sql);
+		return $query->result();
+	}
 }

@@ -42,6 +42,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
+				<?php var_dump($data_user);?>
               <table id="userTable" class="table table-bordered table-striped">
                 <thead>
                 <tr>

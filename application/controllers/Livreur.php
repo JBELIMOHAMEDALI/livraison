@@ -3,6 +3,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Livreur extends Admin_Controller
 {
+	public function __construct()
+	{
+		parent::__construct();
+
+		//$this->not_logged_in();
+
+		//$this->data['page_title'] = 'User';
+
+		$this->load->model('model_users');
+
+
+
+	}
 	public function index()
 	{
 		$this->data['page_title'] = 'livreur';
@@ -11,7 +24,7 @@ class Livreur extends Admin_Controller
 	public function index_home()
 	{
 		$this->data['page_title'] = 'livreur_index';
-		$this->render_template('livreur_index');
+		$this->render_template('livreur_index',$this->data);
 
 	}
 }

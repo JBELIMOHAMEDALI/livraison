@@ -1,12 +1,6 @@
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-	<!-- Content Header (Page header) -->
-
-
-	<!-- Main content rit edha 3andek 7aja ch tbadelha dima lhnea raw howa deja nav bar
-	 o side bar o headear yjib fihom m template mouch mena -->
-	<!--ma fhemtech -->
 	<section class="content">
 		<!-- Small boxes (Stat box) -->
 		<div class="row">
@@ -26,9 +20,9 @@
 
 				<div class="box">
 					<div class="box-header">
-						<h3 class="box-title">Add User</h3>
+						<h3 class="box-title">Add User/<?php echo $_SESSION["type"];  ?></h3>
 					</div>
-					<form role="form" action="<?= base_url('livreur/index') ?>" method="post">
+					<form role="form" action="<?= base_url('livreur/add') ?>" method="post">
 						<div class="box-body">
 
 							<?php echo validation_errors(); ?>
@@ -78,6 +72,7 @@
 									<label>
 										<input type="radio" name="gender" id="female" value="2">
 										Female
+
 									</label>
 								</div>
 							</div>
