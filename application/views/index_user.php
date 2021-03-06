@@ -69,7 +69,7 @@
 										<td><?php echo $value->telph_rec ?></td>
 											<td>
 													<a href="<?php  ?>" class="btn btn-default" data-toggle="modal" data-target="#exampleModalCenter" id="<?php echo $value->id_commande   ?>" onClick="reply_click(this.id)" ><i class="fa fa-edit"></i></a>
-													<a href="<?php ?>" class="btn btn-default" data-toggle="modal" data-target="#exampleModalLong" id="<?php echo $value->id_commande   ?>" onClick="reply_click(this.id)"><i class="fa fa-trash" ></i></a>
+													<a href="<?php ?>" class="btn btn-default" data-toggle="modal" data-target="#exampleModalLong" id="<?php echo $value->id_commande   ?>" onClick="reply_click2(this.id)"><i class="fa fa-trash" ></i></a>
 											</td>
 									</tr>
 								<?php endforeach ?>
@@ -123,7 +123,11 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				2
+				<div class="editor-field textBoxEmployeeNumber">
+					<input class="text-box single-line" data-val="true" data-val-number="The field EmployeeId must be a number." data-val-required="The EmployeeId field is required." id="EmployeeId" name="EmployeeId" type="text" value="" />
+
+					<span class="field-validation-valid" data-valmsg-for="EmployeeId" data-valmsg-replace="true"></span>
+				</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -164,4 +168,14 @@
 	{
 		alert(clicked_id);
 	}
+	function reply_click2(clicked_id)
+	{
+		alert(clicked_id);
+	}
+	$(document).ready(function() {
+
+		$(function () {
+			$('.textBoxEmployeeNumber input').val("fgg");
+		});
+	})
 </script>
