@@ -34,17 +34,6 @@
 								</select>
 							</div>
 						<br><br>
-						<!--<div class="col-auto my-1">
-							<label class="mr-sm-2" for="inlineFormCustomSelect">Preference</label>
-							<select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-								<option selected>Choose...</option>
-								<option value="1">One</option>
-								<option value="2">Two</option>
-								<option value="3">Three</option>
-							</select>							<a href="<?php echo base_url('livreur/index') ?>" class="btn btn-primary">Add User</a>
-
-						</div>-->
-
 					</div>
 					<div style="display: flex;justify-content:flex-end; margin-right:50px;margin-bottom: 20px ">
 						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -79,8 +68,8 @@
 										<td><?php  echo $value->adresse_rec ?></td>
 										<td><?php echo $value->telph_rec ?></td>
 											<td>
-													<a href="<?php  ?>" class="btn btn-default" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-edit"></i></a>
-													<a href="<?php ?>" class="btn btn-default" data-toggle="modal" data-target="#exampleModalLong"><i class="fa fa-trash" ></i></a>
+													<a href="<?php  ?>" class="btn btn-default" data-toggle="modal" data-target="#exampleModalCenter" id="<?php echo $value->id_commande   ?>" onClick="reply_click(this.id)" ><i class="fa fa-edit"></i></a>
+													<a href="<?php ?>" class="btn btn-default" data-toggle="modal" data-target="#exampleModalLong" id="<?php echo $value->id_commande   ?>" onClick="reply_click(this.id)"><i class="fa fa-trash" ></i></a>
 											</td>
 									</tr>
 								<?php endforeach ?>
@@ -154,7 +143,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				delate part 
+				delate part
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -169,4 +158,10 @@
 		$("#mainUserNav").addClass('active');
 		$("#manageUserNav").addClass('active');
 	});
+</script>
+<script type="text/javascript">
+	function reply_click(clicked_id)
+	{
+		alert(clicked_id);
+	}
 </script>
