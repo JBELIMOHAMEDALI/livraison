@@ -63,14 +63,14 @@
                         <td></td>
                         <td></td>
 
-                       
+
                         <td>
-                          
+						<a href="" class="btn btn-default"><i class="fa fa-edit"></i></a>
+						<a href="" class="btn btn-default"><i class="fa fa-trash"></i></a>
+
                         </td>
-                     
-                      </tr>
-                
-             
+
+
                 </tbody>
               </table>
             </div>
@@ -81,7 +81,7 @@
         <!-- col-md-12 -->
       </div>
       <!-- /.row -->
-      
+
 
     </section>
     <!-- /.content -->
