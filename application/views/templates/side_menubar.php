@@ -11,6 +11,21 @@
 						<span>Historique</span>
 					</a>
 				</li>
+					<li class="treeview" id="mainGroupNav">
+						<a href="#">
+							<i class="fa fa-files-o"></i>
+							<span>commande</span>
+							<span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+						</a>
+						<ul class="treeview-menu">
+
+								<li id="addGroupNav"><a href="<?php echo base_url('groups/create') ?>"><i class="fa fa-circle-o"></i> Ajouter Commande</a></li>
+
+								<li id="manageGroupNav"><a href="<?php echo base_url('groups') ?>"><i class="fa fa-circle-o"></i> Manage Groups</a></li>
+						</ul>
+					</li>
 				<!-- user permission info -->
 				<li><a href="<?php echo base_url('auth/logout') ?>"><i class="glyphicon glyphicon-log-out"></i> <span>Déconnecter</span></a></li>
 			</ul>

@@ -9,7 +9,7 @@
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li class="active">Users</li>
+			<li class="active">Commande </li>
 		</ol>
 	</section>
 
@@ -22,7 +22,7 @@
 				<br /> <br />
 				<div class="box">
 					<div class="box-header">
-						<h3 class="box-title">Manage Users</h3>
+						<h3 class="box-title">Manage Commande</h3>
 
 					</div>
 
@@ -89,73 +89,7 @@
 	</section>
 	<!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
-<!-- add -->
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				1
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- upadate -->
-
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<div class="editor-field textBoxEmployeeNumber">
-					<input class="text-box single-line" data-val="true" data-val-number="The field EmployeeId must be a number." data-val-required="The EmployeeId field is required." id="EmployeeId" name="EmployeeId" type="text" value="" />
-
-					<span class="field-validation-valid" data-valmsg-for="EmployeeId" data-valmsg-replace="true"></span>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- delete -->
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				delate part
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
-			</div>
-		</div>
-	</div>
-</div>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#userTable').DataTable();
@@ -178,4 +112,5 @@
 			$('.textBoxEmployeeNumber input').val("fgg");
 		});
 	})
-</script>
+</script >
+
