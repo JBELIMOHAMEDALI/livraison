@@ -16,7 +16,7 @@
 	<!-- Style -->
 	<link rel="stylesheet" href="<?php echo base_url('assets2/css/style.css') ?>">
 
-	<title>Login #9</title>
+	<title>Connection </title>
 </head>
 <body>
 
@@ -33,8 +33,8 @@
 					<div class="col-md-12">
 						<div class="form-block">
 							<div class="mb-4">
-								<h3>Sign In to <strong>Colorlib</strong></h3>
-								<p class="mb-4">Lorem ipsum dolor sit amet elit. Sapiente sit aut eos consectetur adipisicing.</p>
+								<h3>Sign In to <strong>AMAL EXPRESS</strong></h3>
+								<p class="mb-4"></p>
 							</div>
 							<form action="<?php echo base_url('auth/login') ?>" method="post">
 								<div class="form-group first">
@@ -59,6 +59,7 @@
 								<input type="submit" value="Log In" class="btn btn-pill text-white btn-block btn-primary">
 
 								<span class="d-block text-center my-4 text-muted"><a href="<?php echo base_url("register")?>">or sign in</a> </span>
+								<input type="button" value="Home" class="btn btn-pill text-white btn-block btn-secondary" onClick="myFunction()">
 
 							<!--	<div class="social-login text-center">
 									<a href="#" class="facebook">
@@ -87,3 +88,8 @@
 <script src="<?php echo base_url('assets2/js/main.js') ?>"></script>
 </body>
 </html>
+<script>
+function myFunction() {
+    window.location.href="<?php echo base_url() ?>";
+  }
+ </script>

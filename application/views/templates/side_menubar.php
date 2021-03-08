@@ -21,9 +21,9 @@
 						</a>
 						<ul class="treeview-menu">
 
-								<li id="addGroupNav"><a href="<?php echo base_url('groups/create') ?>"><i class="fa fa-circle-o"></i> Ajouter Commande</a></li>
+								<li id="addGroupNav"><a href="<?php echo base_url('user/index_addus') ?>"><i class="fa fa-circle-o"></i> Ajouter Commande</a></li>
 
-								<li id="manageGroupNav"><a href="<?php echo base_url('groups') ?>"><i class="fa fa-circle-o"></i> Manage Groups</a></li>
+								<li id="manageGroupNav"><a href="<?php echo base_url('user/index_us') ?>"><i class="fa fa-circle-o"></i> Manage commande</a></li>
 						</ul>
 					</li>
 				<!-- user permission info -->

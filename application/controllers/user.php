@@ -28,9 +28,18 @@ class User extends Admin_Controller {
 	}
 
 	public function index_us()
+{
+	$this->data['data_user'] = $this->model_users->getComondeUserData();
+	$this->render_template('index_user',$this->data);
+}
+	public function index_addus()
 	{
-		$this->data['data_user'] = $this->model_users->getComondeUserData();
-		$this->render_template('index_user',$this->data);
+		$this->render_template('add_commande_user');
+	}
+	public function index_update_commande()
+	{
+		$this->data['data_commande'] = $this->model_users->get_commande_by_id(1);
+		$this->render_template('update_user',$this->data);
 	}
 	public function generete_barCode()
 	{
@@ -65,9 +74,9 @@ class User extends Admin_Controller {
 		$this->form_validation->set_rules('password', 'Password', 'trim|min_length[4]|required|alpha_numeric');
 		$this->form_validation->set_rules('confirmpassword', 'Confirm password', 'trim|matches[password]|required');
 
-		$this->form_validation->set_rules('nom_rec', 'First Name Receiver ', 'trim|required|alpha');
-		$this->form_validation->set_rules('prenom_rec', 'Last Name Receiver', 'trim|required|alpha');
-		$this->form_validation->set_rules('Region_rec', 'Region Receiver', 'trim|required|alpha');
+		$this->form_validation->set_rules('nom_rec', 'First Name Receiver ', 'trim|required');
+		$this->form_validation->set_rules('prenom_rec', 'Last Name Receiver', 'trim|required');
+		$this->form_validation->set_rules('Region_rec', 'Region Receiver', 'trim|required');
 		$this->form_validation->set_rules('adresse_rec', 'Address Receiver', 'trim|required');
 		$this->form_validation->set_rules('telph_rec', 'Phone Receiver', 'trim|required|numeric');
 		$this->form_validation->set_rules('qte', 'Amount', 'trim|required|numeric');
@@ -115,58 +124,20 @@ class User extends Admin_Controller {
 				}
 		}
 	}
-public  function add_commande()
+	public  function add_commande()
 {
-	$validate_data = array(
-		array(
-			'field' => 'nom_rec',
-			'label' => 'Sélectionner type de seance  :',
-			'rules' => 'required'
-		),
-		array(
-			'field' => 'prenom_rec',
-			'label' => 'Sab',
-			'rules' => 'required'
-		),
-		array(
-			'field' => 'Region_rec',
-			'label' => 'Enseignant',
-			'rules' => 'required'
-		),
-		array(
-			'field' => 'adresse_rec',
-			'label' => 'Salle',
-			'rules' => 'required'
-		),
-		array(
-			'field' => 'telph_rec',
-			'label' => 'Section',
-			'rules' => 'required'
-		),
-		array(
-			'field' => 'qte',
-			'label' => 'Matiére',
-			'rules' => 'required'
-		),
-		array(
-			'field' => 'nom_art',
-			'label' => 'Classe',
-			'rules' => 'required'
-		),
-
-	);
-
-	$this->form_validation->set_rules($validate_data);
-	$this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
-	$this->form_validation->set_message('required', 'Saisissez %s');
-	/*$this->form_validation->set_rules('nom_rec', 'First Name Receiver ', 'trim|required|alpha');
-	$this->form_validation->set_rules('prenom_rec', 'Last Name Receiver', 'trim|required|alpha');
-	$this->form_validation->set_rules('Region_rec', 'Region Receiver', 'trim|required|alpha');
+	$this->form_validation->set_rules('nom_rec', 'First Name Receiver ', 'trim|required');
+	$this->form_validation->set_rules('prenom_rec', 'Last Name Receiver', 'trim|required');
+	$this->form_validation->set_rules('Region_rec', 'Region Receiver', 'trim|required');
 	$this->form_validation->set_rules('adresse_rec', 'Address Receiver', 'trim|required');
 	$this->form_validation->set_rules('telph_rec', 'Phone Receiver', 'trim|required|numeric');
 	$this->form_validation->set_rules('qte', 'Amount', 'trim|required|numeric');
-	$this->form_validation->set_rules('nom_art', 'Item', 'trim|required');*/
+	$this->form_validation->set_rules('nom_art', 'Item', 'trim|required');
+	if (!$this->form_validation->run()) {
+		return $this->redirectTo();
+	}
 
+	else {
 		$data_barcode=$this->generete_barCode();
 		$data2 = array(
 			'nom_rec' =>$this->input->post('nom_rec'),
@@ -180,23 +151,22 @@ public  function add_commande()
 			'imagbarcode'=>$data_barcode['imagName'],
 			'qte' =>$this->input->post('qte')
 		);
+		//var_dump($data2);
 		$create2 = $this->model_users->addCommende($data2);
-		 if ($create2 == true) {
-			//   $this->session->set_flashdata('msg', '<div class="alert alert-success text-center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Ajouté avec succès</div>');
-			$validator['success'] = true;
-			$validator['messages'] = "Ajouté avec succès";
-		}  else {
-			$validator['success'] = false;
-			$validator['messages'] = "Erreur lors de l\'insertion de l\'information dans la base de données";
-			// $this->session->set_flashdata('msg', '<div class="alert alert-success text-center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Erreur lors de l\'insertion de l\'information dans la base de données</div>');
+		if($create2) {
+			$this->session->set_flashdata('success', 'Successfully created');
+			$this->redirectTo();
 		}
-		// redirect(base_url('emplois'));
-		echo json_encode($validator);
+		else {
+			$this->session->set_flashdata('errors', 'Error occurred!!');
+$this->redirectTo();
+		}
+
 	}
 
 
 
-
+}
 	public function password_hash($pass = '')
 	{
 		if($pass) {
@@ -204,6 +174,8 @@ public  function add_commande()
 			return $password;
 		}
 	}
-
-
+	public function redirectTo()
+{
+	$this->render_template('add_commande_user');
+}
 }

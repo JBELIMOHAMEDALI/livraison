@@ -35,4 +35,11 @@ class Model_users extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->result();
 	}
+
+	public function get_commande_by_id($id)
+	{
+		$sql="SELECT * FROM commande WHERE id_commande =".$id;
+		$query = $this->db->query($sql);
+		return $query->result();
+	}
 }

@@ -27,12 +27,12 @@
 					</div>
 
 					<div class="col-auto my-1" style="display: flex;justify-content: center">
-							<div class="form-group col-md-4" style="text-align: center">
-								<select id="inputState" class="form-control">
-									<option selected>Choose...</option>
-									<option>...</option>
-								</select>
-							</div>
+						<div class="form-group col-md-4" style="text-align: center">
+							<select id="inputState" class="form-control">
+								<option selected>Choose...</option>
+								<option>...</option>
+							</select>
+						</div>
 						<br><br>
 					</div>
 					<div style="display: flex;justify-content:flex-end; margin-right:50px;margin-bottom: 20px ">
@@ -67,10 +67,13 @@
 										<td><?php echo $value->Region_rec ?></td>
 										<td><?php  echo $value->adresse_rec ?></td>
 										<td><?php echo $value->telph_rec ?></td>
-											<td>
-													<a href="<?php  ?>" class="btn btn-default" data-toggle="modal" data-target="#exampleModalCenter" id="<?php echo $value->id_commande   ?>" onClick="reply_click(this.id)" ><i class="fa fa-edit"></i></a>
-													<a href="<?php ?>" class="btn btn-default" data-toggle="modal" data-target="#exampleModalLong" id="<?php echo $value->id_commande   ?>" onClick="reply_click2(this.id)"><i class="fa fa-trash" ></i></a>
-											</td>
+										<td>
+											<a href="<?php echo base_url('user/index_update_commande
+											') ?>"
+											   class="btn btn-default" 
+											   id="<?php echo $value->id_commande   ?>"  ><i class="fa fa-edit"></i></a>
+											<a href="<?php ?>" class="btn btn-default" data-toggle="modal" data-target="#exampleModalLong" id="<?php echo $value->id_commande   ?>" onClick="reply_click2(this.id)"><i class="fa fa-trash" ></i></a>
+										</td>
 									</tr>
 								<?php endforeach ?>
 							<?php endif; ?>
@@ -108,9 +111,7 @@
 	}
 	$(document).ready(function() {
 
-		$(function () {
-			$('.textBoxEmployeeNumber input').val("fgg");
-		});
+		
 	})
 </script >
 
