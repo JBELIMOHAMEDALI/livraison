@@ -8,6 +8,7 @@
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
 			<li class="active"> Modifier Commande </li>
+			<?php var_dump($data_commande); ?>
 		</ol>
 	</section>
 	<section class="content">

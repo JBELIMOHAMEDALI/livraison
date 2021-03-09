@@ -28,21 +28,18 @@
 
 					<div class="col-auto my-1" style="display: flex;justify-content: center">
 						<div class="form-group col-md-4" style="text-align: center">
-							<select id="inputState" class="form-control">
-								<option selected>Choose...</option>
-								<option>...</option>
+							<select id="inputState" name ="inputState"  class="form-control">
+								<option value="0" selected>Type...</option>
+								<option value="0">En Attente </option>
+								<option value="1">En cour </option>
+								<option value="2">Expedia </option>
+								<option value="3">Retour </option>
 							</select>
 						</div>
 						<br><br>
 					</div>
-					<div style="display: flex;justify-content:flex-end; margin-right:50px;margin-bottom: 20px ">
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-							Launch demo modal
-						</button>
-					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
-
 						<table id="userTable" class="table table-bordered table-striped">
 							<thead>
 							<tr>
@@ -51,12 +48,11 @@
 								<th>Name</th>
 								<th>Phone</th>
 								<th>Group</th>
-
 								<th>Action</th>
 
 							</tr>
 							</thead>
-							<tbody>
+							<tbody id="tablou_body">
 							<?php if($data_user): ?>
 								<?php
 								foreach ($data_user as $value) :?>
@@ -68,11 +64,11 @@
 										<td><?php  echo $value->adresse_rec ?></td>
 										<td><?php echo $value->telph_rec ?></td>
 										<td>
-											<a href="<?php echo base_url('user/index_update_commande
-											') ?>"
-											   class="btn btn-default" 
+											<a href="<?php echo base_url('user/index_update_commande') ?>"
+											   class="btn btn-default"
 											   id="<?php echo $value->id_commande   ?>"  ><i class="fa fa-edit"></i></a>
-											<a href="<?php ?>" class="btn btn-default" data-toggle="modal" data-target="#exampleModalLong" id="<?php echo $value->id_commande   ?>" onClick="reply_click2(this.id)"><i class="fa fa-trash" ></i></a>
+											<a href="<?php ?>" class="btn btn-default" data-toggle="modal" data-toggle="modal" onClick="reply_click(this.id)" data-target="#exampleModal" id="<?php echo $value->id_commande ?>"><i class="fa fa-trash" ></i></a>
+
 										</td>
 									</tr>
 								<?php endforeach ?>
@@ -92,26 +88,106 @@
 	</section>
 	<!-- /.content -->
 </div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
 
+				<form class="needs-validation" method="get" action="<?= base_url('user/delete') ?>" >
+				<h1>Êtes-vous sûr de Vouloir Supprimer !! </h1>
+				<input type="hidden" id="id_commandeh1" name="id_commandeh1" >
+				</form>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+				<button type="submit" class="btn btn-danger" id="addEmploiModelBtn" name="addEmploiModelBtn">supprimer</button>
+			</div>
+		</div>
+	</div>
+</div>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#userTable').DataTable();
 		$("#mainUserNav").addClass('active');
 		$("#manageUserNav").addClass('active');
+
 	});
 </script>
 <script type="text/javascript">
 	function reply_click(clicked_id)
 	{
-		alert(clicked_id);
+		document.getElementById("id_commandeh1").value= clicked_id.toString();
 	}
-	function reply_click2(clicked_id)
-	{
-		alert(clicked_id);
-	}
-	$(document).ready(function() {
+	$("#addEmploiModelBtn").on('click', function() {
+		var x;
+		x=document.getElementById("id_commandeh1").value;
 
-		
+		$.ajax({
+			type: 'POST',
+			url: "delete_commande",
+			data: {id_commandeh1: x},
+			dataType: 'JSON',
+			async:false,
+			success: function(data){
+				if(data==true){
+					console.log("relode")
+				window.onunload = window.location.reload;
+				}
+			}
+		});
+		location.reload();
 	})
-</script >
+</script>
+<script>
+	jQuery(document).ready(function($) {
+		$('#inputState').on("change", function () {
+			var selectedCountry = $(this).children("option:selected").val();
+			//console.log(selectedCountry);
+			var res = "";
+			$.ajax({
 
+				type: 'POST',
+				url: 'getAllData',
+				data: {type:selectedCountry},
+				dataType: 'JSON',
+				async: false,
+				success: function (data) {
+					moduleTwo = data;
+				}
+			});
+
+			if(moduleTwo.length){
+			for (let key = 0; key < moduleTwo.length; key++) {
+				res += "</tr>";
+				res += "<tr>";
+				res += "<td>" + moduleTwo[key].nom_rec + "</td>";
+				res += "<td>" + moduleTwo[key].status + "</td>";
+				res += "<td>" + moduleTwo[key].Region_rec + "</td>";
+				res += "<td>" + moduleTwo[key].adresse_rec + "</td>";
+				res += "<td>" + moduleTwo[key].telph_rec + "</td>";
+				res += "<td>"+
+					"<a href='http://127.0.0.1/livretion/user/index_update_commande' class='btn btn-default' id='"+moduleTwo[key].id_commande+"'  ><i class='fa fa-edit'></i></a>" +
+					"<a href='#' class='btn btn-default' data-toggle='modal' data-toggle='modal' onClick='reply_click(this.id)' data-target='#exampleModal' id='"+moduleTwo[key].id_commande+"'><i class='fa fa-trash' ></i></a>\n"
+
+					+"</td>";
+				res += "</tr>";
+			}
+			}
+			else
+			{
+				console.log("videvide")
+				res += "<tr>";
+				res += "<td colspan='6' style='text-align: center;'> No data available in table</td>";
+				res += "</tr>";
+			}
+			$("#tablou_body").html(res);
+		});
+	});
+</script>

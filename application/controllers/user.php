@@ -26,10 +26,9 @@ class User extends Admin_Controller {
 		$this->load->library('form_validation');
 
 	}
-
 	public function index_us()
 {
-	$this->data['data_user'] = $this->model_users->getComondeUserData();
+	$this->data['data_user'] = $this->model_users->getComondeUserData($_SESSION["id"]);
 	$this->render_template('index_user',$this->data);
 }
 	public function index_addus()
@@ -38,7 +37,7 @@ class User extends Admin_Controller {
 	}
 	public function index_update_commande()
 	{
-		$this->data['data_commande'] = $this->model_users->get_commande_by_id(1);
+		$this->data['data_commande'] = $this->model_users->get_commande_by_id(34);
 		$this->render_template('update_user',$this->data);
 	}
 	public function generete_barCode()
@@ -178,4 +177,57 @@ $this->redirectTo();
 {
 	$this->render_template('add_commande_user');
 }
+	public function delete_commande()
+	{$id=$this->input->post('id_commandeh1');
+		$ok=$this->model_users->delte($id);
+		if($ok){
+			//$this->render_template('index_us');
+			return true;
+		}
+		else
+		{
+			$this->session->set_flashdata('errors', 'Error occurred supprition !!');
+			//$this->render_template('index_us');
+			return false;
+		}
+	}
+	public function getAllData()
+	{$type=$this->input->post('type');
+		$data=$this->model_users->getComondeUserDatabayType($_SESSION["id"],$type) ;
+		echo json_encode ($data) ;
+	}
+	public function update_commande()
+	{
+		$this->form_validation->set_rules('nom_rec', 'First Name Receiver ', 'trim|required');
+		$this->form_validation->set_rules('prenom_rec', 'Last Name Receiver', 'trim|required');
+		$this->form_validation->set_rules('Region_rec', 'Region Receiver', 'trim|required');
+		$this->form_validation->set_rules('adresse_rec', 'Address Receiver', 'trim|required');
+		$this->form_validation->set_rules('telph_rec', 'Phone Receiver', 'trim|required|numeric');
+		$this->form_validation->set_rules('qte', 'Amount', 'trim|required|numeric');
+		$this->form_validation->set_rules('nom_art', 'Item', 'trim|required');
+		if (!$this->form_validation->run()) {
+			return $this->load->view('register');
+		}
+		else {
+			$data2 = array(
+				'nom_rec' =>$this->input->post('nom_rec'),
+				'prenom_rec' =>$this->input->post('prenom_rec'),
+				'Region_rec' => $this->input->post('Region_rec'),
+				'adresse_rec' =>$this->input->post('adresse_rec'),
+				'telph_rec' =>$this->input->post('telph_rec'),
+				'nom_art' =>$this->input->post('nom_art'),
+				'qte' =>$this->input->post('qte')
+			);
+			$update = $this->model_users->upadt_Commande($this->input->post('id_commande'),$data2);
+			if($update) {
+				$this->session->set_flashdata('success', 'Successfully created');
+				$this->redirectTo();
+			}
+			else {
+				$this->session->set_flashdata('errors', 'Error occurred!!');
+				$this->redirectTo();
+			}
+		}
+
+	}
 }

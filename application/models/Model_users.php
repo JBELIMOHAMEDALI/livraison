@@ -29,17 +29,42 @@ class Model_users extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->num_rows();
 	}
-	public function getComondeUserData($id=1,$type="0")
+	public function getComondeUserData($id,$type="0")
 	{
 		$sql="select c.* from users u join commande c on u.id_user=c.id_user where u.id_user= ".$id." and c.status ='".$type."'";
 		$query = $this->db->query($sql);
 		return $query->result();
 	}
-
 	public function get_commande_by_id($id)
 	{
 		$sql="SELECT * FROM commande WHERE id_commande =".$id;
 		$query = $this->db->query($sql);
 		return $query->result();
+
+
+	}
+	public function delte($id)
+	{
+		$this->db->where('id_commande', $id);
+		$payment_name = $this->db->delete('commande');
+		return $payment_name;
+	}
+	public function getAllDataCommande($id)
+	{
+		$sql="SELECT * FROM commande WHERE id_user =".$id;
+		$query = $this->db->query($sql);
+		return $query->result_array();
+	}
+	public function getComondeUserDatabayType($id,$type)
+	{
+		$sql="select c.* from users u join commande c on u.id_user=c.id_user where u.id_user= ".$id." and c.status ='".$type."'";
+		$query = $this->db->query($sql);
+		return $query->result();
+	}
+	public function upadt_Commande($data,$idCommande )
+	{
+		$this->db->where('id_commande', $idCommande);
+		$query = $this->db->update('commande', $data);
+		return ($query === true ? true : false);
 	}
 }
