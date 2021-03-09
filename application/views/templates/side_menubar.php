@@ -5,11 +5,8 @@
 			<ul class="sidebar-menu" data-widget="tree">
 
 				<li id="dashboardMainMenu"><a href="<?php echo base_url('user/index_us') ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-				<li class="treeview" id="mainProductNav">
-					<a href="#">
-						<i class="fa fa-history" aria-hidden="true"></i>
-						<span>Historique</span>
-					</a>
+				<li><a href="<?php echo base_url('user/index_usALL') ?>"><i class="fa fa-history" ></i> <span>Historique</span></a></li>
+
 				</li>
 					<li class="treeview" id="mainGroupNav">
 						<a href="#">
@@ -55,7 +52,31 @@
 						<span>Bonde Entre</span>
 					</a>
 				</li>
-				<li><a href="<?php echo base_url('Livreur/index_home') ?>"><i class="fa fa-truck" aria-hidden="true"></i><span>Livreure</span></a></li>
+
+
+				<li class="treeview" id="mainGroupNav">
+					<a href="#">
+						<i class="fa fa-truck" aria-hidden="true"></i>
+						<span>Livreure</span>
+						<span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+					</a>
+					<ul class="treeview-menu">
+
+						<li id="addGroupNav"><a href="<?php echo base_url('Livreur/indexaddLivreur') ?>"><i class="fa fa-circle-o"></i> Ajouter Livreure</a></li>
+
+						<li id="manageGroupNav"><a href="<?php echo base_url('Livreur/index_home') ?>"><i class="fa fa-circle-o"></i> Manage Livreure</a></li>
+					</ul>
+				</li>
+
+
+
+
+
+
+
+				<li><a href="<?php echo base_url('') ?>"><i class="fa fa-truck" aria-hidden="true"></i><span>Livreure</span></a></li>
 				<li><a href="<?php echo base_url('auth/logout') ?>"><i class="glyphicon glyphicon-log-out"></i> <span>Logout</span></a></li>
 			</ul>
 		<?php  endif; ?>

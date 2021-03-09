@@ -65,9 +65,9 @@
 							</tr>
 							</thead>
 							<tbody id="tablou_body">
-							<?php if($data_user): ?>
+							<?php if($data_userALL): ?>
 								<?php
-								foreach ($data_user as $value) :?>
+								foreach ($data_userALL as $value) :?>
 
 									<tr>
 										<td><?php echo $value->nom_rec?></td>
@@ -78,9 +78,7 @@
 										<td>
 											<a href="<?php echo base_url('user/index_update_commande') ?>"
 											   class="btn btn-default"
-											   id="<?php echo $value->id_commande?>" onClick="reply_click(this.id)"  ><i class="fa fa-edit"></i></a>
-											<a href="<?php ?>" class="btn btn-default" data-toggle="modal" data-toggle="modal" onClick="reply_click2(this.id)" data-target="#exampleModal" id="<?php echo $value->id_commande ?>"><i class="fa fa-trash" ></i></a>
-
+											   id="<?php echo $value->id_commande?>" onClick="reply_click(this.id)"  ><i class="fa fa-print" aria-hidden="true"></i></a>
 										</td>
 									</tr>
 								<?php endforeach ?>
@@ -112,8 +110,8 @@
 			<div class="modal-body">
 
 				<form class="needs-validation" method="get" action="<?= base_url('user/delete_commande') ?>" >
-				<h1>Êtes-vous sûr de Vouloir Supprimer !! </h1>
-				<input type="hidden" id="id_commandeh1" name="id_commandeh1" >
+					<h1>Êtes-vous sûr de Vouloir Supprimer !! </h1>
+					<input type="hidden" id="id_commandeh1" name="id_commandeh1" >
 				</form>
 
 			</div>
@@ -147,7 +145,7 @@
 	$("#addEmploiModelBtn").on('click', function() {
 		var x;
 		x=document.getElementById("id_commandeh1").value;
-console.log(x)
+		console.log(x)
 		$.ajax({
 			type: 'POST',
 			url: "delete_commande",
@@ -157,7 +155,7 @@ console.log(x)
 			success: function(data){
 				if(data==true){
 					console.log("relode")
-				//window.onunload = window.location.reload;
+					//window.onunload = window.location.reload;
 				}
 			}
 		});
@@ -183,21 +181,21 @@ console.log(x)
 			});
 
 			if(moduleTwo.length){
-			for (let key = 0; key < moduleTwo.length; key++) {
-				res += "</tr>";
-				res += "<tr>";
-				res += "<td>" + moduleTwo[key].nom_rec + "</td>";
-				res += "<td>" + moduleTwo[key].status + "</td>";
-				res += "<td>" + moduleTwo[key].Region_rec + "</td>";
-				res += "<td>" + moduleTwo[key].adresse_rec + "</td>";
-				res += "<td>" + moduleTwo[key].telph_rec + "</td>";
-				res += "<td>"+
-					"<a href='http://127.0.0.1/livretion/user/index_update_commande' class='btn btn-default' id='"+moduleTwo[key].id_commande+"'  ><i class='fa fa-edit'></i></a>" +
-					"<a href='#' class='btn btn-default' data-toggle='modal' data-toggle='modal' data-target='#exampleModal' id='"+moduleTwo[key].id_commande+"'><i class='fa fa-trash' ></i></a>\n"
+				for (let key = 0; key < moduleTwo.length; key++) {
+					res += "</tr>";
+					res += "<tr>";
+					res += "<td>" + moduleTwo[key].nom_rec + "</td>";
+					res += "<td>" + moduleTwo[key].status + "</td>";
+					res += "<td>" + moduleTwo[key].Region_rec + "</td>";
+					res += "<td>" + moduleTwo[key].adresse_rec + "</td>";
+					res += "<td>" + moduleTwo[key].telph_rec + "</td>";
+					res += "<td>"+
+						"<a href='http://127.0.0.1/livretion/user/index_update_commande' class='btn btn-default' id='"+moduleTwo[key].id_commande+"'  ><i class='fa fa-edit'></i></a>" +
+						"<a href='#' class='btn btn-default' data-toggle='modal' data-toggle='modal' data-target='#exampleModal' id='"+moduleTwo[key].id_commande+"'><i class='fa fa-trash' ></i></a>\n"
 
-					+"</td>";
-				res += "</tr>";
-			}
+						+"</td>";
+					res += "</tr>";
+				}
 			}
 			else
 			{

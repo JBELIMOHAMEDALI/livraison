@@ -29,15 +29,21 @@ class User extends Admin_Controller {
 	public function index_us()
 {
 	$this->data['data_user'] = $this->model_users->getComondeUserData($_SESSION["id"]);
-	$this->render_template('index_user',$this->data);
+	$this->render_template('index_user',$this->data);//index_us
 }
+	public function index_usALL()
+	{
+		$this->data['data_userALL'] = $this->model_users->getAllDataCommande($_SESSION["id"]);
+		$this->render_template('hisytorique_user',$this->data);//index_us
+	}
+
 	public function index_addus()
 	{
 		$this->render_template('add_commande_user');
 	}
 	public function index_update_commande()
 	{
-		$this->data['data_commande'] = $this->model_users->get_commande_by_id(34);
+		$this->data['data_commande'] = $this->model_users->get_commande_by_id($_SESSION["Update_commande_id"]);
 		$this->render_template('update_user',$this->data);
 	}
 	public function generete_barCode()
@@ -177,6 +183,11 @@ $this->redirectTo();
 {
 	$this->render_template('add_commande_user');
 }
+	public function redirectTow()
+	{
+		$this->data['data_commande'] = null;
+		$this->render_template('update_user',$this->data);
+	}
 	public function delete_commande()
 	{$id=$this->input->post('id_commandeh1');
 		$ok=$this->model_users->delte($id);
@@ -206,7 +217,7 @@ $this->redirectTo();
 		$this->form_validation->set_rules('qte', 'Amount', 'trim|required|numeric');
 		$this->form_validation->set_rules('nom_art', 'Item', 'trim|required');
 		if (!$this->form_validation->run()) {
-			return $this->load->view('register');
+			return $this->redirectTow();
 		}
 		else {
 			$data2 = array(
@@ -215,19 +226,27 @@ $this->redirectTo();
 				'Region_rec' => $this->input->post('Region_rec'),
 				'adresse_rec' =>$this->input->post('adresse_rec'),
 				'telph_rec' =>$this->input->post('telph_rec'),
-				'nom_art' =>$this->input->post('nom_art'),
+				'nom_article' =>$this->input->post('nom_art'),
 				'qte' =>$this->input->post('qte')
 			);
-			$update = $this->model_users->upadt_Commande($this->input->post('id_commande'),$data2);
+
+			$id=$_SESSION["Update_commande_id"];
+			$update = $this->model_users->upadt_Commande($data2,$id);
 			if($update) {
-				$this->session->set_flashdata('success', 'Successfully created');
-				$this->redirectTo();
+				$this->session->set_flashdata('success', 'Successfully Update');
+				unset($_SESSION['Update_commande_id']);
+				$this->index_us();
 			}
 			else {
 				$this->session->set_flashdata('errors', 'Error occurred!!');
-				$this->redirectTo();
+				$this->redirectTow();
 			}
 		}
+
+	}
+	public function getSestionCommande()
+	{
+		$_SESSION["Update_commande_id"] = $_POST["id"];
 
 	}
 }

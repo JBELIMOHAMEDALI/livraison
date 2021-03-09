@@ -74,8 +74,45 @@
 	  <?php elseif($type == "user"): ?>
 	  <div>
 		  <section class="content">
-			  <h1>user</h1>
-			  <!--  -->
+			  <div class="col-lg-4 col-xs-10">
+				  <!-- small box -->
+				  <div class="small-box bg-yellow">
+					  <div class="inner">
+						  <h3></h3>
+						  <p>Nombre total d'utilisateurs</p>
+					  </div>
+					  <div class="icon">
+						  <i class="ion ion-android-people"></i>
+					  </div>
+					  <a href="#" class="small-box-footer">plus d'information <i class="fa fa-arrow-circle-right"></i></a>
+				  </div>
+			  </div>
+			  <div class="col-lg-4 col-xs-10">
+				  <!-- small box -->
+				  <div class="small-box bg-yellow">
+					  <div class="inner">
+						  <h3></h3>
+						  <p>Nombre total d'utilisateurs</p>
+					  </div>
+					  <div class="icon">
+						  <i class="ion ion-android-people"></i>
+					  </div>
+					  <a href="#" class="small-box-footer">plus d'information <i class="fa fa-arrow-circle-right"></i></a>
+				  </div>
+			  </div>
+			  <div class="col-lg-4 col-xs-10">
+				  <!-- small box -->
+				  <div class="small-box bg-yellow">
+					  <div class="inner">
+						  <h3></h3>
+						  <p>Nombre total d'utilisateurs</p>
+					  </div>
+					  <div class="icon">
+						  <i class="ion ion-android-people"></i>
+					  </div>
+					  <a href="#" class="small-box-footer">plus d'information <i class="fa fa-arrow-circle-right"></i></a>
+				  </div>
+			  </div>
 		  </section>
 
 	  </div>

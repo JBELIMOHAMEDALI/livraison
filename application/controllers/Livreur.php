@@ -23,8 +23,13 @@ class Livreur extends Admin_Controller
 	}
 	public function index_home()
 	{
-		$this->data['page_title'] = 'livreur_index';
+		$this->data['page_title'] = 'Livreur';
 		$this->render_template('livreur_index',$this->data);
 
+	}
+	public function indexaddLivreur()
+	{
+		$this->data['page_title'] = 'Livreur';
+		$this->render_template('addLivreure',$this->data);
 	}
 }

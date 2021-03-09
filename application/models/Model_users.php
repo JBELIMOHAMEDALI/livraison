@@ -51,9 +51,9 @@ class Model_users extends CI_Model
 	}
 	public function getAllDataCommande($id)
 	{
-		$sql="SELECT * FROM commande WHERE id_user =".$id;
+		$sql="SELECT * FROM commande where id_user =".$id." ORDER BY status";
 		$query = $this->db->query($sql);
-		return $query->result_array();
+		return $query->result();
 	}
 	public function getComondeUserDatabayType($id,$type)
 	{
