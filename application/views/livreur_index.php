@@ -6,11 +6,11 @@
     <section class="content-header">
       <h1>
         Manage
-        <small>Users</small>
+        <small>Livreur</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Users</li>
+        <li class="active">Livreur</li>
       </ol>
     </section>
 
@@ -32,17 +32,17 @@
             </div>
           <?php endif; ?>
 
-            <a href="<?php echo base_url('livreur/index') ?>" class="btn btn-primary">Add User</a>
+
             <br /> <br />
 
 
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Manage Users</h3>
+              <h3 class="box-title">Manage Livreur</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-				<?php var_dump($data_user);?>
+
               <table id="userTable" class="table table-bordered table-striped">
                 <thead>
                 <tr>
@@ -50,28 +50,31 @@
                   <th>Email</th>
                   <th>Name</th>
                   <th>Phone</th>
-                  <th>Group</th>
-
                   <th>Action</th>
 
                 </tr>
                 </thead>
                 <tbody>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+				<?php if($data_user): ?>
+					<?php
+					foreach ($data_user as $value) :?>
 
+						<tr>
+							<td><?php echo $value->nom?></td>
+							<td><?php echo $value->prenom ?></td>
+							<td><?php echo $value->tel ?></td>
+							<td><?php  echo $value->info ?></td>
 
-                        <td>
-						<a href="" class="btn btn-default"><i class="fa fa-edit"></i></a>
-						<a href="" class="btn btn-default"><i class="fa fa-trash"></i></a>
+							<td>
+								<a href="<?php echo base_url('user/index_update_commande') ?>"
+								   class="btn btn-default"
+								   id="<?php echo $value->id_livreur?>" onClick="reply_click(this.id)"  ><i class="fa fa-edit"></i></a>
+								<a href="<?php ?>" class="btn btn-default" data-toggle="modal" data-toggle="modal" onClick="reply_click2(this.id)" data-target="#exampleModal" id="<?php echo $value->id_livreur ?>"><i class="fa fa-trash" ></i></a>
 
-                        </td>
-
-
+							</td>
+						</tr>
+					<?php endforeach ?>
+				<?php endif; ?>
                 </tbody>
               </table>
             </div>
@@ -88,7 +91,30 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+		  <div class="modal-content">
+			  <div class="modal-header">
+				  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+				  </button>
+			  </div>
+			  <div class="modal-body">
 
+				  <form class="needs-validation" method="get" action="<?= base_url('user/delete_commande') ?>" >
+					  <h1>Êtes-vous sûr de Vouloir Supprimer !! </h1>
+					  <input type="hidden" id="id_livreure" name="id_livreure" >
+				  </form>
+
+			  </div>
+			  <div class="modal-footer">
+				  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+				  <button type="submit" class="btn btn-danger" id="addEmploiModelBtn" name="addEmploiModelBtn">supprimer</button>
+			  </div>
+		  </div>
+	  </div>
+  </div>
   <script type="text/javascript">
     $(document).ready(function() {
       $('#userTable').DataTable();
@@ -97,3 +123,37 @@
       $("#manageUserNav").addClass('active');
     });
   </script>
+
+  <script type="text/javascript">
+	  function reply_click(clicked_id)
+	  {
+		  console.log(clicked_id);
+		  $.post("getSestionCommande", {id:clicked_id});
+	  }
+	  function reply_click2(clicked_id)
+	  {
+		  console.log(clicked_id);
+		  document.getElementById("id_livreure").value = clicked_id.toString();
+		  //$.post("getSestionCommande", {id:clicked_id});
+	  }
+	  $("#addEmploiModelBtn").on('click', function() {
+		  var x;
+		  x=document.getElementById("id_livreure").value;
+		  $.ajax({
+			  type: 'POST',
+			  url: "delete_Livreur",
+			  data: {id: x},
+			  dataType: 'JSON',
+			  async:false,
+			  success: function(data){
+				  if(data==true){
+					  console.log("relode")
+					  //window.onunload = window.location.reload;
+				  }
+			  }
+		  });
+		  location.reload();
+	  })
+  </script>
+
+

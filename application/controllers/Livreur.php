@@ -6,15 +6,7 @@ class Livreur extends Admin_Controller
 	public function __construct()
 	{
 		parent::__construct();
-
-		//$this->not_logged_in();
-
-		//$this->data['page_title'] = 'User';
-
-		$this->load->model('model_users');
-
-
-
+		$this->load->model('Model_livreur');
 	}
 	public function index()
 	{
@@ -24,6 +16,7 @@ class Livreur extends Admin_Controller
 	public function index_home()
 	{
 		$this->data['page_title'] = 'Livreur';
+		$this->data['data_user'] = $this->Model_livreur->getAllLivreure();
 		$this->render_template('livreur_index',$this->data);
 
 	}
@@ -31,5 +24,67 @@ class Livreur extends Admin_Controller
 	{
 		$this->data['page_title'] = 'Livreur';
 		$this->render_template('addLivreure',$this->data);
+	}
+	public function redirectTo()
+	{
+		$this->render_template('indexaddLivreur');
+	}
+	public function add_Livreur()
+	{
+		$this->form_validation->set_rules('nom', 'Nom Livreure ', 'trim|required');
+		$this->form_validation->set_rules('prenom', 'Prenom  Livreure', 'trim|required');
+		$this->form_validation->set_rules('tel', 'Telephone Livreure', 'trim|required');
+		$this->form_validation->set_rules('info', 'Info Livreure', 'trim|required');
+
+		if (!$this->form_validation->run()) {
+			return $this->indexaddLivreur();
+		}
+
+		else {
+			$data2 = array(
+				'nom' =>$this->input->post('nom'),
+				'prenom' =>$this->input->post('prenom'),
+				'tel' => $this->input->post('tel'),
+				'info' =>$this->input->post('info')
+			);
+			//var_dump($data2);
+			$create2 = $this->Model_livreur->addlivreur($data2);
+			if($create2) {
+				$this->session->set_flashdata('success', 'Successfully created');
+				$this->indexaddLivreur();
+			}
+			else {
+				$this->session->set_flashdata('errors', 'Error occurred!!');
+				$this->indexaddLivreur();
+			}
+
+		}
+
+
+
+	}
+	public function delete_Livreur()
+	{$id=$this->input->post('id');
+		$ok=$this->Model_livreur->delte($id);
+		if($ok){
+			//$this->render_template('index_us');
+			return true;
+		}
+		else
+		{
+			$this->session->set_flashdata('errors', 'Error occurred supprition !!');
+			//$this->render_template('index_us');
+			return false;
+		}
+	}
+	public function index_update_Livreur()
+	{
+		$this->data['data_commande'] = $this->model_users->get_commande_by_id($_SESSION["Update_livreur_id"]);
+		$this->render_template('update_livreur',$this->data);
+	}
+	public function getSestionCommande()
+	{
+		$_SESSION["Update_livreur_id"] = $_POST["id"];
+
 	}
 }

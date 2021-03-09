@@ -7,7 +7,8 @@
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li class="active"> Ajouter Livreur </li>
+			<li class="active"> Modifier Commande </li>
+			<?php //print_r($_SESSION); ?>
 		</ol>
 	</section>
 	<section class="content">
@@ -24,26 +25,27 @@
 			</div>
 		<?php endif; ?>
 		<div class="row">
-			<form class="needs-validation" method="post" action="<?= base_url('Livreur/add_Livreur') ?>" novalidate>
+			<form class="needs-validation" method="post" action="<?= base_url('user/update_commande') ?>" novalidate>
 				<div class="modal-body">
 					<div class="form-group">
 						<label for="formGroupExampleInput">Nom Livreur: * </label>
-						<input type="text" class="form-control" id="nom" name="nom" placeholder="Nom Livreur" required/>
+						<input type="text" class="form-control" id="nom" value="<?php if($data_commande != null) {echo $data_commande[0]->nom; }else{echo set_value('nom');}?>" name="nom" placeholder="Nom Livreur" required/>
 						<?php echo form_error('nom',' <div class="alert alert-danger" role="alert">','</div>') ?>
 					</div>
 					<div class="form-group">
 						<label for="formGroupExampleInput2">Prenom Livreur : *</label>
-						<input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prenom Livreur" required/>
+						<input type="text" class="form-control" id="prenom" value="<?php if($data_commande != null) {echo $data_commande[0]->prenom; }else{echo set_value('prenom');} ?>" name="prenom" placeholder="Prenom Livreur" required/>
 						<?php echo form_error('prenom',' <div class="alert alert-danger" role="alert">','</div>') ?>
 					</div>
+
 					<div class="form-group">
 						<label for="formGroupExampleInput2">Telephone Livreur: *</label>
-						<input type="text" class="form-control" id="tel" name="tel" placeholder="Telephone Livreur" required/>
+						<input type="text" class="form-control" id="tel" value="<?php if($data_commande != null) {echo $data_commande[0]->tel; }else{echo set_value('tel');} ?>" name="tel" placeholder="Telephone Livreur" required/>
 						<?php echo form_error('tel',' <div class="alert alert-danger" role="alert">','</div>') ?>
 					</div>
 					<div class="form-group">
-						<label for="formGroupExampleInput2">Info : *</label>
-						<input type="text" class="form-control" id="info" name="info" placeholder="Info." required/>
+						<label for="formGroupExampleInput2">Info Livreur: *</label>
+						<input type="text" class="form-control" id="info" value="<?php if($data_commande != null) {echo $data_commande[0]->info;  }else{echo set_value('info');} ?>" name="adresse_rec" placeholder="Info Livreur" required/>
 						<?php echo form_error('info',' <div class="alert alert-danger" role="alert">','</div>') ?>
 					</div>
 				</div>
