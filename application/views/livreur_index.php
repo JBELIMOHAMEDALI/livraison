@@ -66,7 +66,7 @@
 							<td><?php  echo $value->info ?></td>
 
 							<td>
-								<a href="<?php echo base_url('user/index_update_commande') ?>"
+								<a href="<?php echo base_url('Livreur/index_update_Livreur') ?>"
 								   class="btn btn-default"
 								   id="<?php echo $value->id_livreur?>" onClick="reply_click(this.id)"  ><i class="fa fa-edit"></i></a>
 								<a href="<?php ?>" class="btn btn-default" data-toggle="modal" data-toggle="modal" onClick="reply_click2(this.id)" data-target="#exampleModal" id="<?php echo $value->id_livreur ?>"><i class="fa fa-trash" ></i></a>
@@ -128,7 +128,7 @@
 	  function reply_click(clicked_id)
 	  {
 		  console.log(clicked_id);
-		  $.post("getSestionCommande", {id:clicked_id});
+		  $.post("getSestionLivreure", {id:clicked_id});
 	  }
 	  function reply_click2(clicked_id)
 	  {

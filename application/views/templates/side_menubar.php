@@ -76,8 +76,8 @@
 
 
 
-				<li><a href="<?php echo base_url('') ?>"><i class="fa fa-truck" aria-hidden="true"></i><span>Livreure</span></a></li>
-				<li><a href="<?php echo base_url('auth/logout') ?>"><i class="glyphicon glyphicon-log-out"></i> <span>Logout</span></a></li>
+
+				<li><a href="<?php echo base_url('auth/logout') ?>"><i class="glyphicon glyphicon-log-out"></i> <span>Déconnecter</span></a></li>
 			</ul>
 		<?php  endif; ?>
       <!-- sidebar menu: : style can be found in sidebar.less -->

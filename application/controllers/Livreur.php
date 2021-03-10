@@ -79,12 +79,47 @@ class Livreur extends Admin_Controller
 	}
 	public function index_update_Livreur()
 	{
-		$this->data['data_commande'] = $this->model_users->get_commande_by_id($_SESSION["Update_livreur_id"]);
+		$this->data['data_commande'] = $this->Model_livreur->get_Livreure_by_id($_SESSION["Update_livreur_id"]);
 		$this->render_template('update_livreur',$this->data);
 	}
-	public function getSestionCommande()
+	public function getSestionLivreure()
 	{
 		$_SESSION["Update_livreur_id"] = $_POST["id"];
+		//var_dump($_SESSION);
+	}
+	public function update_Livreur()
+	{
+		$this->form_validation->set_rules('nom', 'Nom Livreure ', 'trim|required');
+		$this->form_validation->set_rules('prenom', 'Prenom  Livreure', 'trim|required');
+		$this->form_validation->set_rules('tel', 'Telephone Livreure', 'trim|required');
+		$this->form_validation->set_rules('info', 'Info Livreure', 'trim|required');
+
+		if (!$this->form_validation->run()) {
+			return $this->index_update_Livreur();
+		}
+
+		else {
+			$data2 = array(
+				'nom' =>$this->input->post('nom'),
+				'prenom' =>$this->input->post('prenom'),
+				'tel' => $this->input->post('tel'),
+				'info' =>$this->input->post('info')
+			);
+			//var_dump($data2);
+			$id=$_SESSION["Update_livreur_id"];
+			$update = $this->Model_livreur->upadt_Livreure($data2,$id);
+			if($update) {
+				$this->session->set_flashdata('success', 'Successfully Update');
+				$this->index_home();
+			}
+			else {
+				$this->session->set_flashdata('errors', 'Error occurred!!');
+				$this->index_home();
+			}
+
+		}
+
+
 
 	}
 }

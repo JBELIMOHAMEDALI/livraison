@@ -7,7 +7,7 @@
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li class="active"> Modifier Commande </li>
+			<li class="active"> Modifier Livreur </li>
 			<?php //print_r($_SESSION); ?>
 		</ol>
 	</section>
@@ -25,7 +25,7 @@
 			</div>
 		<?php endif; ?>
 		<div class="row">
-			<form class="needs-validation" method="post" action="<?= base_url('user/update_commande') ?>" novalidate>
+			<form class="needs-validation" method="post" action="<?= base_url('Livreur/update_Livreur') ?>" novalidate>
 				<div class="modal-body">
 					<div class="form-group">
 						<label for="formGroupExampleInput">Nom Livreur: * </label>
@@ -45,7 +45,7 @@
 					</div>
 					<div class="form-group">
 						<label for="formGroupExampleInput2">Info Livreur: *</label>
-						<input type="text" class="form-control" id="info" value="<?php if($data_commande != null) {echo $data_commande[0]->info;  }else{echo set_value('info');} ?>" name="adresse_rec" placeholder="Info Livreur" required/>
+						<input type="text" class="form-control" id="info" value="<?php if($data_commande != null) {echo $data_commande[0]->info;  }else{echo set_value('info');} ?>" name="info" placeholder="Info Livreur" required/>
 						<?php echo form_error('info',' <div class="alert alert-danger" role="alert">','</div>') ?>
 					</div>
 				</div>
