@@ -116,7 +116,8 @@ class User extends Admin_Controller {
 				'nom_article' =>$this->input->post('nom_art'),
 				'barcode'=>$data_barcode['imageID'],
 				'imagbarcode'=>$data_barcode['imagName'],
-				'qte' =>$this->input->post('qte')
+				'qte' =>$this->input->post('qte'),
+				'date'=> date('y-m-d')
 			);
 				$create2 = $this->model_users->addCommende($data2);
 				if($create && $create2) {
@@ -154,7 +155,8 @@ class User extends Admin_Controller {
 			'nom_article' =>$this->input->post('nom_art'),
 			'barcode'=>$data_barcode['imageID'],
 			'imagbarcode'=>$data_barcode['imagName'],
-			'qte' =>$this->input->post('qte')
+			'qte' =>$this->input->post('qte'),
+			'date'=> date('Y-m-d')
 		);
 		//var_dump($data2);
 		$create2 = $this->model_users->addCommende($data2);

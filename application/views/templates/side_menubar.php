@@ -34,12 +34,8 @@
 						<span>Bonde Entre </span>
 					</a>
 				</li>
-				<li class="treeview" id="mainProductNav">
-					<a href="#">
-						<i class="fa fa-history" aria-hidden="true"></i>
-						<span>Stocke</span>
-					</a>
-				</li>
+				<li><a href="<?php echo base_url('Stock/index_homme') ?>"><i class="fa fa-archive" aria-hidden="true"></i> <span>Stocke</span></a></li>
+
 				<li class="treeview" id="mainProductNav">
 					<a href="#">
 						<i class="fa fa-history" aria-hidden="true"></i>
@@ -69,14 +65,6 @@
 						<li id="manageGroupNav"><a href="<?php echo base_url('Livreur/index_home') ?>"><i class="fa fa-circle-o"></i> Manage Livreure</a></li>
 					</ul>
 				</li>
-
-
-
-
-
-
-
-
 				<li><a href="<?php echo base_url('auth/logout') ?>"><i class="glyphicon glyphicon-log-out"></i> <span>Déconnecter</span></a></li>
 			</ul>
 		<?php  endif; ?>
