@@ -5,17 +5,8 @@ class User extends Admin_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-
-		//$this->not_logged_in();
-		
-		//$this->data['page_title'] = 'User';
-
 		$this->load->model('model_users');
-		
-
 	}
-
-	
 	public function index()
 	{
 		//$result = array();	
@@ -36,7 +27,6 @@ class User extends Admin_Controller {
 		$this->data['data_userALL'] = $this->model_users->getAllDataCommande($_SESSION["id"]);
 		$this->render_template('hisytorique_user',$this->data);//index_us
 	}
-
 	public function index_addus()
 	{
 		$this->render_template('add_commande_user');
@@ -250,5 +240,15 @@ $this->redirectTo();
 	{
 		$_SESSION["Update_commande_id"] = $_POST["id"];
 
+	}
+	public function index_getAll_user()
+	{
+		$this->data['data_userALL'] = $this->model_users->getAllUser();
+		$this->render_template('index_user',$this->data);//index_us
+	}
+	public function index_users()
+	{
+		$this->data['data_user'] = $this->model_users->getAllUser();
+		$this->render_template('list_user',$this->data);//index_us
 	}
 }

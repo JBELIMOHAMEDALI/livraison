@@ -67,4 +67,10 @@ class Model_users extends CI_Model
 		$query = $this->db->update('commande', $data);
 		return ($query === true ? true : false);
 	}
+	public function  getAllUser()
+	{
+		$sql="select * from users ";
+		$query = $this->db->query($sql);
+		return $query->result();
+	}
 }
