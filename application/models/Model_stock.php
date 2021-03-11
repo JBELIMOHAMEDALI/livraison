@@ -13,6 +13,12 @@ class Model_stock extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->result();
 	}
+	public function get_all2_stock()
+	{
+		$sql="SELECT * FROM commande";
+		$query = $this->db->query($sql);
+		return $query->result();
+	}
 	public function getDataBayDate($date)
 	{
 		$sql="SELECT * FROM commande Where date like '%".$date."'";
@@ -40,5 +46,10 @@ class Model_stock extends CI_Model
 		$payment_name = $this->db->delete('commande');
 		return $payment_name;
 	}
-
+	public function getComondeUserDatabayType($type)
+	{
+		$sql="select c.* from commande c where c.status ='".$type."'";
+		$query = $this->db->query($sql);
+		return $query->result();
+	}
 }

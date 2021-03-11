@@ -34,8 +34,40 @@
 						<span>Bonde Entre </span>
 					</a>
 				</li>
-				<li><a href="<?php echo base_url('Stock/index_homme') ?>"><i class="fa fa-archive" aria-hidden="true"></i> <span>Stocke</span></a></li>
 
+				<!---------------------------------------------->
+
+
+
+
+
+
+				<li class="treeview" id="mainGroupNav">
+					<a href="#">
+						<i class="fa fa-archive" aria-hidden="true"></i>
+						<span>Stocke</span>
+						<span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+					</a>
+					<ul class="treeview-menu">
+
+						<li id="addGroupNav"><a href="<?php echo base_url('Stock/index_homme') ?>"><i class="fa fa-circle-o"></i> Manage Stocke</a></li>
+
+						<li id="manageGroupNav"><a href="<?php echo base_url('Stock/index_hommeAll') ?>"><i class="fa fa-circle-o"></i>Historique Stock
+								</a></li>
+					</ul>
+				</li>
+
+
+
+
+
+
+
+
+
+				<!---------------------------------------------->
 				<li class="treeview" id="mainProductNav">
 					<a href="#">
 						<i class="fa fa-history" aria-hidden="true"></i>

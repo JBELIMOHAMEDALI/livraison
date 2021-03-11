@@ -47,4 +47,16 @@ class Stock extends Admin_Controller {
 			return false;
 		}
 	}
+	public function index_hommeAll()
+	{
+		$this->data['page_title'] = 'Stock';
+		$this->data['data_userALL'] = $this->Model_stock->get_all2_stock();
+		$this->render_template('historique_stock',$this->data);
+	}
+	public function getAllData()
+	{$type=$this->input->post('type');
+		$data=$this->Model_stock->getComondeUserDatabayType($type) ;
+		echo json_encode ($data) ;
+	}
+
 }
