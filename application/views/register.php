@@ -357,6 +357,9 @@
 									<label class="fieldlabels">Amount: *</label>
 									<input type="text" id="qte" name="qte" placeholder="amount" required/>
 									<?php echo form_error('qte',' <div class="alert alert-danger" role="alert">','</div>') ?>
+									<label class="fieldlabels">Price: *</label>
+									<input type="text" id="prix_article" name="prix_article" placeholder="price" required/>
+									<?php echo form_error('prix_article',' <div class="alert alert-danger" role="alert">','</div>') ?>
 
 
 								</div> <input type="submit" style="text-transform: uppercase;color: #673AB7;font-weight: normal;background: lightgray;"  name="next"  value="Submit" /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />

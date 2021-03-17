@@ -28,31 +28,9 @@
 			</ul>
 		<?php elseif($_SESSION["type"]=="1" ): ?>
 			<ul class="sidebar-menu" data-widget="tree">
-				<li class="treeview" id="mainProductNav">
-					<a href="#">
-						<i class="fa fa-history" aria-hidden="true"></i>
-						<span>Bonde Entre </span>
-					</a>
-				</li>
+				<li id="dashboardMainMenu"><a href="<?php echo base_url('dashboard') ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+				<li><a href="<?php echo base_url('bs') ?>"><i class="fa fa-clipboard" aria-hidden="true"></i> <span>BS </span></a></li>
 
-				<!---------------------------------------------->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-				<!---------------------------------------------->
 				<li class="treeview" id="mainProductNav">
 					<a href="#">
 						<i class="fa fa-history" aria-hidden="true"></i>

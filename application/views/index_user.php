@@ -53,6 +53,7 @@
 					<!-- /.box-header -->
 					<div class="box-body">
 						<table id="userTable" class="table table-bordered table-striped">
+
 							<thead>
 							<tr>
 								<th>Username</th>
@@ -124,6 +125,7 @@
 		</div>
 	</div>
 </div>
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#userTable').DataTable();

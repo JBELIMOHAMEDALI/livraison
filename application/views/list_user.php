@@ -35,7 +35,7 @@
 
 				<br /> <br />
 
-
+<?php var_dump($_SESSION); ?>
 				<div class="box">
 					<div class="box-header">
 						<h3 class="box-title">Manage Users</h3>
@@ -103,7 +103,7 @@
 
 					<input type="hidden" id="id_livreure" name="id_livreure" >
 					<label for="prix">Nouveau Prix :  </label>
-					<input type="text" id="prix" name="prix" >
+					<input type="numberss" id="prix" name="prix" >
 				</form>
 
 			</div>
@@ -124,11 +124,7 @@
 </script>
 
 <script type="text/javascript">
-	function reply_click(clicked_id)
-	{
-		console.log(clicked_id);
-		$.post("getSestionLivreure", {id:clicked_id});
-	}
+
 	function reply_click2(clicked_id)
 	{
 		console.log(clicked_id);
@@ -137,13 +133,15 @@
 	}
 	$("#addEmploiModelBtn").on('click', function() {
 		var x;
+		var y;
 		x=document.getElementById("id_livreure").value;
 		y=document.getElementById("prix").value;
+		//console.log(x+" / "+y);
 
 		$.ajax({
 			type: 'POST',
 			url: "updateUser",
-			data: {id: x,prix;y},
+			data: {id: x,prix:y},
 			dataType: 'JSON',
 			async:false,
 			success: function(data){

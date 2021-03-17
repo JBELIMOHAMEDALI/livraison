@@ -61,6 +61,11 @@
 						<input type="text" class="form-control" id="qte" name="qte" placeholder="amount" required/>
 						<?php echo form_error('qte',' <div class="alert alert-danger" role="alert">','</div>') ?>
 					</div>
+					<div class="form-group">
+						<label for="formGroupExampleInput2">Price: *</label>
+						<input type="text" class="form-control" id="prix_article" name="prix_article" placeholder="Price" required/>
+						<?php echo form_error('prix_article',' <div class="alert alert-danger" role="alert">','</div>') ?>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

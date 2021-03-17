@@ -38,24 +38,35 @@ class User extends Admin_Controller {
 	}
 	public function generete_barCode()
 	{
-		$str= md5(uniqid(rand(), true));
-		$id=substr ( $str , 0 , 24 );
+	/*	$str= md5(uniqid(rand(), true));
+		$id=substr ( $str , 0 , 24 );*/
+		$query = $this->db->query("SELECT MAX(id_commande) as id FROM commande");
+		$id = $query->result();
+		$strt=strval($id[0]->id+1);
+		$length=strlen($strt);
+		//print_r($length."/".$strt);
+		$ln=24-$length;
+		$ch="";
+		for($i=0;$i<$ln;$i++){$ch.="0";}
+		$ch.=$strt;
+		$ch2=$ch;//substr ( $ch , 1 , 24 );
 		$type="Code128";
 		$height="100";
+		//echo $ch2;
+
 		$this->load->library('Zend');
 		$this->zend->load('Zend/Barcode');
 		$imageBarcode= Zend_Barcode::factory($type,'image',array(
-			'text'=>$id,
+			'text'=>$ch2,
 			'barHeight'=>$height
 		),array())->draw();
 		$barcode_image = 'barcode-'.date('m_d_H_i_s').'.png';
 		imagepng ( $imageBarcode , './assets/barcode/'.$barcode_image,   -1 , -1 );
 		$data['barcode_image']=$barcode_image;
 		$data=array(
-			"imageID" =>$id,
+			"imageID" =>$ch2,
 			"imagName"=>$barcode_image
 		);
-		//  echo $data['imageID'];
 		return $data ;
 	}
 	public function create()  
@@ -76,6 +87,8 @@ class User extends Admin_Controller {
 		$this->form_validation->set_rules('telph_rec', 'Phone Receiver', 'trim|required|numeric');
 		$this->form_validation->set_rules('qte', 'Amount', 'trim|required|numeric');
 		$this->form_validation->set_rules('nom_art', 'Item', 'trim|required');
+		$this->form_validation->set_rules('prix_article', 'Prise', 'trim|required');
+
 		if (!$this->form_validation->run()) {
 			return $this->load->view('register');
 		}
@@ -95,7 +108,8 @@ class User extends Admin_Controller {
 
 				$create = $this->model_users->create_user($data);
 				$last_id = $this->db->insert_id();
-				//var_dump($last_id);
+
+
 				$data2 = array(
 				'nom_rec' =>$this->input->post('nom_rec'),
 				'prenom_rec' =>$this->input->post('prenom_rec'),
@@ -107,7 +121,8 @@ class User extends Admin_Controller {
 				'barcode'=>$data_barcode['imageID'],
 				'imagbarcode'=>$data_barcode['imagName'],
 				'qte' =>$this->input->post('qte'),
-				'date'=> date('y-m-d')
+				'date'=> date('y-m-d'),
+				'prix_article' =>$this->input->post('prix_article')
 			);
 				$create2 = $this->model_users->addCommende($data2);
 				if($create && $create2) {
@@ -129,6 +144,9 @@ class User extends Admin_Controller {
 	$this->form_validation->set_rules('telph_rec', 'Phone Receiver', 'trim|required|numeric');
 	$this->form_validation->set_rules('qte', 'Amount', 'trim|required|numeric');
 	$this->form_validation->set_rules('nom_art', 'Item', 'trim|required');
+	$this->form_validation->set_rules('prix_article', 'Prise', 'trim|required');
+
+
 	if (!$this->form_validation->run()) {
 		return $this->redirectTo();
 	}
@@ -146,7 +164,9 @@ class User extends Admin_Controller {
 			'barcode'=>$data_barcode['imageID'],
 			'imagbarcode'=>$data_barcode['imagName'],
 			'qte' =>$this->input->post('qte'),
-			'date'=> date('Y-m-d')
+			'date'=> date('Y-m-d'),
+			'prix_article' =>$this->input->post('prix_article')
+
 		);
 		//var_dump($data2);
 		$create2 = $this->model_users->addCommende($data2);
@@ -208,6 +228,7 @@ $this->redirectTo();
 		$this->form_validation->set_rules('telph_rec', 'Phone Receiver', 'trim|required|numeric');
 		$this->form_validation->set_rules('qte', 'Amount', 'trim|required|numeric');
 		$this->form_validation->set_rules('nom_art', 'Item', 'trim|required');
+		$this->form_validation->set_rules('prix', 'Prise', 'trim|required');
 		if (!$this->form_validation->run()) {
 			return $this->redirectTow();
 		}
@@ -219,15 +240,16 @@ $this->redirectTo();
 				'adresse_rec' =>$this->input->post('adresse_rec'),
 				'telph_rec' =>$this->input->post('telph_rec'),
 				'nom_article' =>$this->input->post('nom_art'),
-				'qte' =>$this->input->post('qte')
+				'qte' =>$this->input->post('qte'),
+				'prix' =>$this->input->post('prix')
 			);
 
 			$id=$_SESSION["Update_commande_id"];
 			$update = $this->model_users->upadt_Commande($data2,$id);
 			if($update) {
-				$this->session->set_flashdata('success', 'Successfully Update');
-				unset($_SESSION['Update_commande_id']);
-				$this->index_us();
+				$this->session->set_flashdata('success', 'Successfully Update');$this->index_us();
+				//unset($_SESSION['Update_commande_id']);
+
 			}
 			else {
 				$this->session->set_flashdata('errors', 'Error occurred!!');
@@ -250,5 +272,11 @@ $this->redirectTo();
 	{
 		$this->data['data_user'] = $this->model_users->getAllUser();
 		$this->render_template('list_user',$this->data);//index_us
+	}
+	public function updateUser()
+	{
+		$idUser=$this->input->post('id');
+		$prix=$this->input->post('prix');
+		return $this->model_users->UpdatePrixUser($idUser,$prix);
 	}
 }

@@ -69,8 +69,15 @@ class Model_users extends CI_Model
 	}
 	public function  getAllUser()
 	{
-		$sql="select * from users ";
+		$sql="select * from users WHERE type = 0";
 		$query = $this->db->query($sql);
 		return $query->result();
+	}
+	public function  UpdatePrixUser($id,$prix)
+	{
+	$this->db->where('id_user ',$id);
+	$this->db->set('prix',$prix,FALSE);
+	$status = $this->db->update('users');
+	return $status ;
 	}
 }

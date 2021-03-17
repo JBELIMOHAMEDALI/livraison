@@ -6,6 +6,5 @@ class Register extends Admin_Controller
 	public function index()
 	{
 		$this->load->view('register');
-
 	}
 }
