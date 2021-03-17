@@ -117,22 +117,45 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<h5 class="modal-title" id="exampleModalLabel">BS</h5>
+
+				<button type="button"  class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-body">
+				<div id="div1">
+				<div id="div_Info">
+					<br /><br />
+				<h4 style="text-align: center" id="titre"></h4><br /><br /><br />
+					<div  style="display: flex;">
+				<h4 style=" position: absolute;left: 50px;" id="nomLIv"></h4>
+				<h4 style=" position: absolute;right: 50px;" id="date"></h4><br /><br /><br />
+					</div>
 
-				<form class="needs-validation" method="get" action="<?= base_url('user/delete_commande') ?>" >
-					<h1>Êtes-vous sûr de Vouloir Supprimer !! </h1>
-					<input type="hidden" id="id_commandeh1" name="id_commandeh1" >
-				</form>
+
+				</div>
+				<table class="table table-bordered">
+					<thead>
+					<tr>
+						<th scope="col">Num Commande</th>
+						<th scope="col">Nom & prnom Recever</th>
+						<th scope="col">Tel Recvever</th>
+						<th scope="col">Adrese</th>
+					</tr>
+					</thead>
+					<tbody id="tabDetiles">
+					</tbody>
+				</table>
+				</div>
+
+
 
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-				<button type="submit" class="btn btn-danger" id="addEmploiModelBtn" name="addEmploiModelBtn">supprimer</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal"> Fermer</button>
+				<button type="button" class="btn btn-warning" id="addEmploiModelBtn" onclick="printContent('div1')" name="addEmploiModelBtn">
+					<span class="glyphicon glyphicon-print" aria-hidden="true"></span> Impression</button>
 			</div>
 		</div>
 	</div>
@@ -146,220 +169,92 @@
 	});
 </script>
 <script type="text/javascript">
-	function reply_click(clicked_id)
-	{
-		console.log(clicked_id);
-		$.post("getSestionCommande", {id:clicked_id});
-	}
+
 	function reply_click2(clicked_id)
 	{
-		console.log(clicked_id);
-		document.getElementById("id_commandeh1").value = clicked_id.toString();
+		var id_bs=clicked_id;
+	//	console.log("this is id"+id);
+		$("#div_Info").html(info);
+		if(id_bs.length ) {
+			$.ajax({
+
+				type: 'POST',
+				url: 'bs/getInfoBs',
+				data: {id: id_bs},
+				dataType: 'JSON',
+				async: false,
+				success: function (data) {
+					moduleTwo = data;
+					console.log(moduleTwo)
+				}
+			});
+			var info="";
+			//titre/nomLIv/date
+			var titre="";
+			var livNom="";
+			var livprenom="";
+			var dateLiv="";
+			for (let key = 0; key < moduleTwo.length; key++) {
+				titre=moduleTwo[key].id_bs;
+				livNom=moduleTwo[key].nom;
+				livprenom=moduleTwo[key].prenom;
+				dateLiv=moduleTwo[key].date;
+			}
+
+			$("#titre").html("Num BS : "+titre);
+			$("#nomLIv").html("Livreur : "+livNom+" "+livprenom);
+			$("#date").html("Date  : "+dateLiv);
+		}
+
+		if(id_bs.length )
+		{
+			$.ajax({
+
+				type: 'POST',
+				url: 'bs/getDetaileBs',
+				data: {id:id_bs},
+				dataType: 'JSON',
+				async: false,
+				success: function (data) {
+					moduleTwo = data;
+					console.log(moduleTwo)
+				}
+			});
+			var res="";
+			if(moduleTwo.length){
+				for (let key = 0; key < moduleTwo.length; key++) {
+					res += "<tr>";
+					res += "<td>" + moduleTwo[key].barcode + "</td>";
+					res += "<td>" + moduleTwo[key].nom_rec+" "+moduleTwo[key].prenom_rec + "</td>";
+					res += "<td>" + moduleTwo[key].telph_rec + "</td>";
+					res += "<td>" + moduleTwo[key].adresse_rec + "</td>";
+					res += "</tr>";
+				}
+			}
+			else
+			{
+				//console.log("videvide")
+				res += "<tr>";
+				res += "<td colspan='6' style='text-align: center;'> No data available in table</td>";
+				res += "</tr>";
+			}
+			$("#tabDetiles").html(res);
+		}
+		//document.getElementById("id_commandeh1").value = clicked_id.toString();
 		//$.post("getSestionCommande", {id:clicked_id});
 	}
-	function btn_click()
-	{
-		//console.log("this is serch");
-		var date =$('#birthday').val();
-		var str = $("#search").val();
-		console.log(date+" / "+str);
-		if(date.length && !str.length)
-		{
 
-			var date =$('#birthday').val();
-			var res = "";
-			$.ajax({
-
-				type: 'POST',
-				url: 'getDataByDate',
-				data: {date_val:date},
-				dataType: 'JSON',
-				async: false,
-				success: function (data) {
-					moduleTwo = data;
-				}
-			});
-
-			if(moduleTwo.length){
-				for (let key = 0; key < moduleTwo.length; key++) {
-					res += "</tr>";
-					res += "<tr>";
-					res += "<td>" + moduleTwo[key].nom_rec + "</td>";
-					res += "<td>" + moduleTwo[key].status + "</td>";
-					res += "<td>" + moduleTwo[key].Region_rec + "</td>";
-					res += "<td>" + moduleTwo[key].adresse_rec + "</td>";
-					res += "<td>" + moduleTwo[key].telph_rec + "</td>";
-					res += "<td>"+
-						"<a href='http://127.0.0.1/livretion/user/index_update_commande' class='btn btn-default' id='"+moduleTwo[key].id_commande+"'  ><i class='fa fa-edit'></i></a>" +
-						"<a href='#' class='btn btn-default' data-toggle='modal' data-toggle='modal' data-target='#exampleModal' id='"+moduleTwo[key].id_commande+"'><i class='fa fa-trash' ></i></a>\n"
-
-						+"</td>";
-					res += "</tr>";
-				}
-			}
-			else
-			{
-				console.log("videvide")
-				res += "<tr>";
-				res += "<td colspan='6' style='text-align: center;'> No data available in table</td>";
-				res += "</tr>";
-			}
-			$("#tablou_body").html(res);
-		}
-		if(!date.length && str.length){
-
-
-			var date =$('#birthday').val();
-			var res = "";
-			$.ajax({
-
-				type: 'POST',
-				url: 'getDataByRegion',
-				data: {re_val:str},
-				dataType: 'JSON',
-				async: false,
-				success: function (data) {
-					moduleTwo = data;
-				}
-			});
-
-			if(moduleTwo.length){
-				for (let key = 0; key < moduleTwo.length; key++) {
-					res += "</tr>";
-					res += "<tr>";
-					res += "<td>" + moduleTwo[key].nom_rec + "</td>";
-					res += "<td>" + moduleTwo[key].status + "</td>";
-					res += "<td>" + moduleTwo[key].Region_rec + "</td>";
-					res += "<td>" + moduleTwo[key].adresse_rec + "</td>";
-					res += "<td>" + moduleTwo[key].telph_rec + "</td>";
-					res += "<td>"+
-						"<a href='http://127.0.0.1/livretion/user/index_update_commande' class='btn btn-default' id='"+moduleTwo[key].id_commande+"'  ><i class='fa fa-edit'></i></a>" +
-						"<a href='#' class='btn btn-default' data-toggle='modal' data-toggle='modal' data-target='#exampleModal' id='"+moduleTwo[key].id_commande+"'><i class='fa fa-trash' ></i></a>\n"
-
-						+"</td>";
-					res += "</tr>";
-				}
-			}
-			else
-			{
-				console.log("videvide")
-				res += "<tr>";
-				res += "<td colspan='6' style='text-align: center;'> No data available in table</td>";
-				res += "</tr>";
-			}
-			$("#tablou_body").html(res);
-
-		}
-		if(date.length && str.length){
-
-
-			var date =$('#birthday').val();
-			var res = "";
-			$.ajax({
-
-				type: 'POST',
-				url: 'getDataByDateRegion',
-				data: {date_val:date,re_val:str},
-				dataType: 'JSON',
-				async: false,
-				success: function (data) {
-					moduleTwo = data;
-				}
-			});
-
-			if(moduleTwo.length){
-				for (let key = 0; key < moduleTwo.length; key++) {
-					res += "</tr>";
-					res += "<tr>";
-					res += "<td>" + moduleTwo[key].nom_rec + "</td>";
-					res += "<td>" + moduleTwo[key].status + "</td>";
-					res += "<td>" + moduleTwo[key].Region_rec + "</td>";
-					res += "<td>" + moduleTwo[key].adresse_rec + "</td>";
-					res += "<td>" + moduleTwo[key].telph_rec + "</td>";
-					res += "<td>"+
-						"<a href='http://127.0.0.1/livretion/user/index_update_commande' class='btn btn-default' id='"+moduleTwo[key].id_commande+"'  ><i class='fa fa-edit'></i></a>" +
-						"<a href='#' class='btn btn-default' data-toggle='modal' data-toggle='modal' data-target='#exampleModal' id='"+moduleTwo[key].id_commande+"'><i class='fa fa-trash' ></i></a>\n"
-
-						+"</td>";
-					res += "</tr>";
-				}
-			}
-			else
-			{
-				console.log("videvide")
-				res += "<tr>";
-				res += "<td colspan='6' style='text-align: center;'> No data available in table</td>";
-				res += "</tr>";
-			}
-			$("#tablou_body").html(res);
-
-		}
-
-	}
-	$("#addEmploiModelBtn").on('click', function() {
-		var x;
-		x=document.getElementById("id_commandeh1").value;
-		console.log(x)
-		$.ajax({
-			type: 'POST',
-			url: "delete_commande",
-			data: {id_commandeh1: x},
-			dataType: 'JSON',
-			async:false,
-			success: function(data){
-				if(data==true){
-					console.log("relode")
-					//window.onunload = window.location.reload;
-				}
-			}
-		});
-		location.reload();
-	});
 
 </script>
+
 <script>
-	jQuery(document).ready(function($) {
-		$('#birthday').on("change", function () {
-			var date =$('#birthday').val();
-			var res = "";
-			$.ajax({
-
-				type: 'POST',
-				url: 'getDataByDate',
-				data: {date_val:date},
-				dataType: 'JSON',
-				async: false,
-				success: function (data) {
-					moduleTwo = data;
-				}
-			});
-
-			if(moduleTwo.length){
-				for (let key = 0; key < moduleTwo.length; key++) {
-					res += "</tr>";
-					res += "<tr>";
-					res += "<td>" + moduleTwo[key].nom_rec + "</td>";
-					res += "<td>" + moduleTwo[key].status + "</td>";
-					res += "<td>" + moduleTwo[key].Region_rec + "</td>";
-					res += "<td>" + moduleTwo[key].adresse_rec + "</td>";
-					res += "<td>" + moduleTwo[key].telph_rec + "</td>";
-					res += "<td>"+
-						"<a href='http://127.0.0.1/livretion/user/index_update_commande' class='btn btn-default' id='"+moduleTwo[key].id_commande+"'  ><i class='fa fa-edit'></i></a>" +
-						"<a href='#' class='btn btn-default' data-toggle='modal' data-toggle='modal' data-target='#exampleModal' id='"+moduleTwo[key].id_commande+"'><i class='fa fa-trash' ></i></a>\n"
-
-						+"</td>";
-					res += "</tr>";
-				}
-			}
-			else
-			{
-				console.log("videvide")
-				res += "<tr>";
-				res += "<td colspan='6' style='text-align: center;'> No data available in table</td>";
-				res += "</tr>";
-			}
-			$("#tablou_body").html(res);
-		});
-	});
+	function printContent(el){
+		var restorepage = document.body.innerHTML;
+		var printcontent = document.getElementById(el).innerHTML;
+		document.body.innerHTML = printcontent;
+		window.print();
+		document.body.innerHTML = restorepage;
+	}
 </script>
+
 

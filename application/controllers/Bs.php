@@ -15,4 +15,23 @@ class Bs extends Admin_Controller {
 		$this->data['page_title'] = 'BS';
 		$this->render_template('bs',$this->data);//index_us
 	}
+	public function getDetaileBs()
+	{
+		$id=$this->input->post('id');
+		$data=$this->Model_bs->getDetaileBs($id) ;
+		echo json_encode ($data) ;
+	}
+	public function getInfoBs()
+	{
+		$id=$this->input->post('id');
+		$data=$this->Model_bs->getInfoBS($id) ;
+		echo json_encode ($data) ;
+	}
+	public function index_affecteBs()
+	{
+
+		$this->data['page_title'] = 'Affecter Commande ';
+		$this->render_template('bs_affecte',$this->data);//index_us
+	}
+
 }
