@@ -1,13 +1,4 @@
-<!--
 
-
--->
-
-
-
-
-
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
@@ -45,13 +36,14 @@
 						<h3 class="box-title">Manage BS</h3>
 
 					</div>
-
+					<form method="post" action="<?= base_url('bs/add_bs') ?>">
 					<div class="col-auto my-1" style="display: flex;justify-content: center">
-						<div class="form-group col-md-5" style="display: flex;align-items: center;text-align: center;">
+						<div class="form-group col-md-9" style="display: flex;align-items: center;text-align: center;">
 							<?php //print_r($data_bs) ?>
+
 							<label for="inputState">Livreur </label>
 							&nbsp;&nbsp;&nbsp;&nbsp;
-							<select id="inputState" class="form-control">
+							<select id="inputState" name="id_livreure" class="form-control">
 								<option selected>Choose un livreur ...</option>
 								<?php
 								foreach ($data_user as $value) : ?>
@@ -59,14 +51,22 @@
 								<?php endforeach; ?>
 
 							</select>
+							<?php echo "<br>"?>
+							<?php echo form_error('id_livreure',' <div class="alert alert-danger" role="alert">','</div>') ?>
+
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<div>	<input type="date" id="birthday" name="birthday"/></div>&nbsp;&nbsp;&nbsp;
+							<div>	<input type="date" id="birthday" name="date"/></div>&nbsp;&nbsp;&nbsp;	<?php echo "<br>"?>
+							<?php echo form_error('date',' <div class="alert alert-danger" role="alert">','</div>') ?>
 
 						</div>
 
-						<a href="#" data-toggle="modal" data-toggle="modal" onClick="reply_click2(this.id)" data-target="#exampleModal"><i class="fa fa-check-circle fa-2x" aria-hidden="true"></i>
-						</a>
+
 						<br><br>
+
+					</form>
+					<button type="submit" class="btn btn-default btn-sm">
+						<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+					</button>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
@@ -109,6 +109,7 @@
 		</div>
 		<!-- /.row -->
 
+</div>
 
 	</section>
 	<!-- /.content -->
@@ -255,6 +256,35 @@
 		window.print();
 		document.body.innerHTML = restorepage;
 	}
+</script>
+
+<script>
+	$(document).ready(function() {
+		$('.aaf').on("click",function(){
+		//	console.log("tag a ");
+			//post code
+			var date=document.getElementById("birthday").value;
+			var id_liv=document.getElementById("inputState").value;
+			//console.log("date : "+date+" / id_liv : "+id_liv);
+			if(date.length && id_liv.length ) {
+				$.ajax({
+
+					type: 'POST',
+					url: 'bs/add_bs',
+					data: {id_livreure: id_liv,date:date},
+					dataType: 'JSON',
+					async: false,
+					success: function (data) {
+						//moduleTwo = data;
+						$.post("index_affecteBs",);
+
+						console.log("data")
+					}
+				});
+			}
+		})
+	});
+
 </script>
 
 

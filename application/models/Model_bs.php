@@ -29,6 +29,35 @@ class Model_bs extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->result();
 	}
-
+	public function insert_bs($data)
+	{
+		if ($this->db->insert("bs", $data)) {
+			return true;
+		}
+		else { return false; }
+	}
+	public function insert_affectation($data)
+	{
+		if ($this->db->insert("bs_detaile", $data)) {
+			return true;
+		}
+		else { return false; }
+	}
+	public function getIdcommande($code)
+	{
+		$sql="SELECT id_commande FROM `commande` WHERE barcode =".$code;
+		$query = $this->db->query($sql);
+		return $query->result();
+	}
+	public function getIdcommande_yes($code)
+	{
+		$sql="SELECT id_commande FROM `commande` WHERE barcode =".$code;
+		$query = $this->db->query($sql);
+		if( $query->result())
+		{
+			return true;
+		}
+		else{ return false;}
+	}
 
 }

@@ -71,7 +71,6 @@ class User extends Admin_Controller {
 	}
 	public function create()  
 	{
-
 		$this->form_validation->set_rules('fname', 'First Name', 'trim|required');
 		$this->form_validation->set_rules('lname', 'Last Name', 'trim|required');
 		$this->form_validation->set_rules('adresse', 'Address', 'trim|required');
