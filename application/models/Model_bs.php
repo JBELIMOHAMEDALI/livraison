@@ -59,5 +59,11 @@ class Model_bs extends CI_Model
 		}
 		else{ return false;}
 	}
+	public function update_etat($id)
+	{
+		$this->db->where('id_commande ',$id);
+		$this->db->set('status','1',FALSE);
+		return $this->db->update('commande');
+	}
 
 }

@@ -59,11 +59,10 @@
 						<table id="userTable" class="table table-bordered table-striped">
 							<thead>
 							<tr>
-								<th>Username</th>
-								<th>Email</th>
-								<th>Name</th>
-								<th>Phone</th>
-								<th>Group</th>
+								<th>Nom & Prenom Client</th>
+								<th>Nom & Prenom Destinataire</th>
+								<th>Tel Destinataire</th>
+								<th>Adresse Destinataire</th>
 								<th>Action</th>
 
 							</tr>
@@ -75,11 +74,10 @@
 
 									<tr>
 
-										<td><?php echo $value->nom_rec?></td>
-										<td><?php echo $value->status ?></td>
-										<td><?php echo $value->Region_rec ?></td>
-										<td><?php  echo $value->adresse_rec ?></td>
+										<td><?php echo $value->firstname." ".$value->lastname ?></td>
+										<td><?php echo $value->nom_rec." ".$value->prenom_rec ?></td>
 										<td><?php echo $value->telph_rec ?></td>
+										<td><?php  echo $value->adresse_rec ?></td>
 										<td>
 
 											<a href="<?php ?>" class="btn btn-default" data-toggle="modal" data-toggle="modal" onClick="reply_click2(this.id)" data-target="#exampleModal" id="<?php echo $value->id_commande ?>"><i class="fa fa-trash" ></i></a>

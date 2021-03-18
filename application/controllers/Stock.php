@@ -58,5 +58,17 @@ class Stock extends Admin_Controller {
 		$data=$this->Model_stock->getComondeUserDatabayType($type) ;
 		echo json_encode ($data) ;
 	}
+	public function updateUser()
+	{
+		$id_commande=$this->input->post('id');
+		$statue=$this->input->post('etat');
+		return $this->Model_stock->UpdateEtatCommande($id_commande,$statue);
+	}
+	public function get_print_Commande()
+	{
+		$id_commande=$this->input->post('id');
+		$data=$this->Model_stock->print_commande($id_commande) ;
+		echo json_encode ($data) ;
+	}
 
 }

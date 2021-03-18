@@ -111,7 +111,7 @@ class Bs extends Admin_Controller {
 			'id_bs ' =>$_SESSION["id_bs"]
 		);
 		$create2=$this->Model_bs->insert_affectation($data2) ;
-		if( $create2) {
+		if( $create2 && $this->Model_bs->update_etat($id_commande)) {
 			$this->session->set_flashdata('success', 'Successfully Affection');
 			$this->render_template('bs_affecte');//index_us
 		}

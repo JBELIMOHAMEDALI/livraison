@@ -42,10 +42,10 @@
 						<div class="form-group col-md-4" style="text-align: center">
 							<select id="inputState" name ="inputState"  class="form-control">
 								<option value="0" selected>Type...</option>
-								<option value="0">En Attente </option>
-								<option value="1">En cour </option>
-								<option value="2">Expedia </option>
-								<option value="3">Retour </option>
+								<option value="0"> En Attente</option>
+								<option value="1">En cours</option>
+								<option value="2"> Expédiée </option>
+								<option value="3"> Retour  </option>
 							</select>
 						</div>
 						<br><br>
@@ -55,11 +55,12 @@
 						<table id="userTable" class="table table-bordered table-striped">
 							<thead>
 							<tr>
-								<th>Username</th>
-								<th>Email</th>
-								<th>Name</th>
-								<th>Phone</th>
-								<th>Group</th>
+								<th>Nom & Prenom Client</th>
+								<th>Nom & Prenom Destinataire</th>
+								<th>Tel Destinataire</th>
+								<th>Adresse Destinataire</th>
+								<th>Etat</th>
+								<th>Action</th>
 							</tr>
 							</thead>
 							<tbody id="tablou_body">
@@ -68,16 +69,22 @@
 								foreach ($data_userALL as $value) :?>
 
 									<tr>
-										<td><?php echo $value->nom_rec?></td>
-										<td><?php echo $value->status ?></td>
-										<td><?php echo $value->Region_rec ?></td>
-										<td><?php  echo $value->adresse_rec ?></td>
+										<td><?php echo $value->firstname." ".$value->lastname ?></td>
+										<td><?php echo $value->nom_rec." ".$value->prenom_rec ?></td>
 										<td><?php echo $value->telph_rec ?></td>
+										<td><?php  echo $value->adresse_rec ?></td>
+										<td><?php
+												if($value->status=="0"){
+													echo "En Attente";
+													}else if($value->status=="1"){echo "En cours";
+													}else if($value->status=="2"){echo "Expédiée";
+													}else {echo "Retour";}
+
+											?></td>
 										<td>
-										<!--	<a href="<?php echo base_url('user/index_update_commande') ?>"
-											   class="btn btn-default"
-											   id="<?php echo $value->id_commande?>" onClick="reply_click(this.id)"  ><i class="fa fa-print" aria-hidden="true"></i></a>
-										</td>-->
+											<a href="<?php ?>" class="btn btn-default" data-toggle="modal" data-toggle="modal" onClick="reply_click2(this.id)" data-target="#exampleModal" id="<?php echo $value->id_commande?>"><i class="fa fa-edit"></i></a>
+											<a href="<?php ?>" class="btn btn-default" data-toggle="modal" data-toggle="modal" onClick="reply_click(this.id)" data-target="#exampleModal2" id="<?php echo $value->id_commande?>"><i class="fa fa-print" aria-hidden="true"></i></a>
+										</td>
 									</tr>
 								<?php endforeach ?>
 							<?php endif; ?>
@@ -100,7 +107,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+				<h5 class="modal-title" id="exampleModalLabel"> Modifier l'etat d'une commande</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -108,18 +115,70 @@
 			<div class="modal-body">
 
 				<form class="needs-validation" method="get" action="<?= base_url('user/delete_commande') ?>" >
-					<h1>Êtes-vous sûr de Vouloir Supprimer !! </h1>
-					<input type="hidden" id="id_commandeh1" name="id_commandeh1" >
+
+					<input type="hidden" id="id_livreure" name="id_livreure" >
+					<br>
+					<br>
+					<div class="col-auto my-1" style="display: flex;justify-content: center">
+						<div class="form-group col-md-7" style="display: flex;align-items: center;">
+					<label for="etat">État:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </label>
+					<select id="etat" name="etat" class="form-control">
+						<option selected>choisi État...</option>
+						<option value="0"> En Attente</option>
+						<option value="1">En cours</option>
+						<option value="2"> Expédiée </option>
+						<option value="3"> Retour  </option>
+					</select>
+					</div>
+					</div>
+					<br>
+					<br>
 				</form>
 
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-				<button type="submit" class="btn btn-danger" id="addEmploiModelBtn" name="addEmploiModelBtn">supprimer</button>
+				<button type="submit" class="btn btn-success" id="addEmploiModelBtn" name="addEmploiModelBtn">Modifier</button>
 			</div>
 		</div>
 	</div>
 </div>
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel"> Modifier l'etat d'une commande</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+
+					<div style=" position:fixed;right: 30px;">
+						<h1>right</h1>
+					</div>
+
+
+					<div style="  position:fixed;left: 30px;">
+						<h1>left</h1>
+					</div>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+				<button type="submit" class="btn btn-success" id="addEmploiModelBtn" name="addEmploiModelBtn">Modifier</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#userTable').DataTable();
@@ -132,28 +191,30 @@
 	function reply_click(clicked_id)
 	{
 		console.log(clicked_id);
-		$.post("getSestionCommande", {id:clicked_id});
+		//console.log()
+		//$.post("getSestionCommande", {id:clicked_id});
 	}
 	function reply_click2(clicked_id)
 	{
 		console.log(clicked_id);
-		document.getElementById("id_commandeh1").value = clicked_id.toString();
+		document.getElementById("id_livreure").value = clicked_id.toString();
 		//$.post("getSestionCommande", {id:clicked_id});
 	}
 	$("#addEmploiModelBtn").on('click', function() {
 		var x;
-		x=document.getElementById("id_commandeh1").value;
+		var y;
+		x=document.getElementById("etat").value;
+		y=document.getElementById("id_livreure").value;
 		console.log(x)
 		$.ajax({
 			type: 'POST',
-			url: "delete_commande",
-			data: {id_commandeh1: x},
+			url: "updateUser",
+			data: {id: y,etat:x},
 			dataType: 'JSON',
 			async:false,
 			success: function(data){
 				if(data==true){
 					console.log("relode")
-					//window.onunload = window.location.reload;
 				}
 			}
 		});
