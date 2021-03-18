@@ -19,20 +19,24 @@ class User extends Admin_Controller {
 	}
 	public function index_us()
 {
+	$this->data['page_title'] = 'Commande';
 	$this->data['data_user'] = $this->model_users->getComondeUserData($_SESSION["id"]);
 	$this->render_template('index_user',$this->data);//index_us
 }
 	public function index_usALL()
 	{
+		$this->data['page_title'] = 'Hisytorique';
 		$this->data['data_userALL'] = $this->model_users->getAllDataCommande($_SESSION["id"]);
 		$this->render_template('hisytorique_user',$this->data);//index_us
 	}
 	public function index_addus()
 	{
-		$this->render_template('add_commande_user');
+		$this->data['page_title'] = 'Add Commande';
+		$this->render_template('add_commande_user',$this->data);
 	}
 	public function index_update_commande()
 	{
+		$this->data['page_title'] = 'Update Commande';
 		$this->data['data_commande'] = $this->model_users->get_commande_by_id($_SESSION["Update_commande_id"]);
 		$this->render_template('update_user',$this->data);
 	}
@@ -200,8 +204,22 @@ $this->redirectTo();
 		$this->render_template('update_user',$this->data);
 	}
 	public function delete_commande()
-	{$id=$this->input->post('id_commandeh1');
-		$ok=$this->model_users->delte($id);
+{$id=$this->input->post('id_commandeh1');
+	$ok=$this->model_users->delte($id);
+	if($ok){
+		//$this->render_template('index_us');
+		return true;
+	}
+	else
+	{
+		$this->session->set_flashdata('errors', 'Error occurred supprition !!');
+		//$this->render_template('index_us');
+		return false;
+	}
+}
+	public function delete_user()
+	{$id=$this->input->post('id_commandeh12');
+		$ok=$this->model_users->delte2($id);
 		if($ok){
 			//$this->render_template('index_us');
 			return true;
@@ -269,7 +287,9 @@ $this->redirectTo();
 	}
 	public function index_users()
 	{
+		$this->data['page_title'] = 'Manage Users';
 		$this->data['data_user'] = $this->model_users->getAllUser();
+		$this->data['data_font'] = $this->model_users->get_Font();
 		$this->render_template('list_user',$this->data);//index_us
 	}
 	public function updateUser()

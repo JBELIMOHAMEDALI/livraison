@@ -6,7 +6,7 @@
 	<section class="content-header">
 		<h1>
 			Manage
-			<small>Livreur</small>
+			<small>User</small>
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -35,7 +35,7 @@
 
 				<br /> <br />
 
-<?php var_dump($_SESSION); ?>
+<?php //var_dump($data_font); ?>
 				<div class="box">
 					<div class="box-header">
 						<h3 class="box-title">Manage Users</h3>
@@ -47,9 +47,10 @@
 							<thead>
 							<tr>
 								<th>Email</th>
-								<th>Nom</th>
-								<th>Prenom</th>
+								<th>Nom & Prenom</th>
+								<th>Telephone</th>
 								<th>Prix Commande</th>
+								<th>Font</th>
 								<th>Action</th>
 
 							</tr>
@@ -61,12 +62,25 @@
 
 									<tr>
 										<td><?php echo $value->email?></td>
-										<td><?php echo $value->firstname ?></td>
-										<td><?php echo $value->lastname ?></td>
-										<td><?php  echo $value->prix ?></td>
+										<td><?php echo $value->firstname." ".$value->lastname ?></td>
+										<td><?php echo $value->phone  ?></td>
+										<td><?php  echo $value->prix."DT" ?></td>
+										<td><?php
+											$id_u=$value->id_user;
+											$font=0;
+											foreach ($data_font as $value2) :
+												if($value2->id_user == $id_u)
+												{
+													$font=$value2->font;
+												}
+											endforeach;
+
+											echo $font ."DT";
+											?></td>
 
 										<td>
 											<a href="<?php ?>" class="btn btn-default" data-toggle="modal" data-toggle="modal" onClick="reply_click2(this.id)" data-target="#exampleModal" id="<?php echo $value->id_user  ?>"><i class="fa fa-edit"></i></a>
+											<a href="<?php ?>" class="btn btn-default" data-toggle="modal" data-toggle="modal" onClick="reply_click3(this.id)" data-target="#exampleModal2" id="<?php echo $value->id_user ?>"><i class="fa fa-trash" ></i></a>
 
 										</td>
 									</tr>
@@ -114,6 +128,33 @@
 		</div>
 	</div>
 </div>
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+
+				<form class="needs-validation" method="get" action="<?= base_url('user/delete_user') ?>" >
+					<h1>Êtes-vous sûr de Vouloir Supprimer dddddd!! </h1>
+					<input type="hidden" id="id_commandeh12" name="id_commandeh12" >
+				</form>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+				<button type="submit" class="btn btn-danger" id="addEmploiModelBtn2" name="addEmploiModelBtn2">supprimer</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#userTable').DataTable();
@@ -124,7 +165,12 @@
 </script>
 
 <script type="text/javascript">
-
+	function reply_click3(clicked_id)
+	{
+		console.log(clicked_id);
+		document.getElementById("id_commandeh12").value = clicked_id.toString();
+		//$.post("getSestionCommande", {id:clicked_id});
+	}
 	function reply_click2(clicked_id)
 	{
 		console.log(clicked_id);
@@ -142,6 +188,29 @@
 			type: 'POST',
 			url: "updateUser",
 			data: {id: x,prix:y},
+			dataType: 'JSON',
+			async:false,
+			success: function(data){
+				if(data==true){
+					console.log("relode")
+					//window.onunload = window.location.reload;
+				}
+			}
+		});
+		location.reload();
+	})
+
+	$("#addEmploiModelBtn2").on('click', function() {
+		var x;
+		var y;
+		x=document.getElementById("id_commandeh12").value;
+
+		//console.log(x+" / "+y);
+
+		$.ajax({
+			type: 'POST',
+			url: "delete_user",
+			data: {id_commandeh12: x},
 			dataType: 'JSON',
 			async:false,
 			success: function(data){

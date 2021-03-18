@@ -64,11 +64,16 @@ class Stock extends Admin_Controller {
 		$statue=$this->input->post('etat');
 		return $this->Model_stock->UpdateEtatCommande($id_commande,$statue);
 	}
-	public function get_print_Commande()
+	public function add_print_id()
 	{
-		$id_commande=$this->input->post('id');
-		$data=$this->Model_stock->print_commande($id_commande) ;
-		echo json_encode ($data) ;
+		$_SESSION["print01_commande_id"] = $_POST["id"];
+	}
+	public function index_Print_commande()
+	{
+		// Home
+		$this->data['page_title'] = 'Impression Commande';
+		$this->data['data_commande'] = $this->Model_stock->print_commande($_SESSION["print01_commande_id"]) ;
+		$this->render_template('print_commande',$this->data);
 	}
 
 }

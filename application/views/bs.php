@@ -225,7 +225,7 @@
 			if(moduleTwo.length){
 				for (let key = 0; key < moduleTwo.length; key++) {
 					res += "<tr>";
-					res += "<td>" + moduleTwo[key].barcode + "</td>";
+					res += "<td> <img src='assets/barcode/"+moduleTwo[key].imagbarcode+"' alt='Italian Trulli'></td>";
 					res += "<td>" + moduleTwo[key].nom_rec+" "+moduleTwo[key].prenom_rec + "</td>";
 					res += "<td>" + moduleTwo[key].telph_rec + "</td>";
 					res += "<td>" + moduleTwo[key].adresse_rec + "</td>";

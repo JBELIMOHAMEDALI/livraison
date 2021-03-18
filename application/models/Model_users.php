@@ -49,6 +49,12 @@ class Model_users extends CI_Model
 		$payment_name = $this->db->delete('commande');
 		return $payment_name;
 	}
+	public function delte2($id)
+	{//
+		$this->db->where('id_user', $id);
+		$payment_name = $this->db->delete('users');
+		return $payment_name;
+	}
 	public function getAllDataCommande($id)
 	{
 		$sql="SELECT * FROM commande where id_user =".$id." ORDER BY status";
@@ -79,5 +85,12 @@ class Model_users extends CI_Model
 	$this->db->set('prix',$prix,FALSE);
 	$status = $this->db->update('users');
 	return $status ;
+	}
+
+	public function get_Font()
+	{
+		$sql="select sum(c.qte*c.prix_article)as font,u.id_user from users u join commande c on c.id_user=u.id_user where c.status= 2 and u.type=0 GROUP by u.id_user";
+		$query = $this->db->query($sql);
+		return $query->result();
 	}
 }
