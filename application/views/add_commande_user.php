@@ -37,8 +37,16 @@
 						<?php echo form_error('prenom_rec',' <div class="alert alert-danger" role="alert">','</div>') ?>
 					</div>
 					<div class="form-group">
-						<label for="formGroupExampleInput2">Region Receiver: *</label>
-						<input type="text" class="form-control" id="Region_rec" name="Region_rec" placeholder="Region Receiver" required/>
+						<label for="Region_rec">Region Receiver: *</label>
+						<select class="form-control" id="Region_rec" name="Region_rec">
+							<!--, , , , -->
+							<option selected>---------------Region---------------</option>
+							<option value="Ariana">Ariana</option>
+							<option value="Ben Arous">Ben Arous</option>
+							<option value="Tunis">Tunis</option>
+							<option value="Manouba">Manouba</option>
+
+						</select>
 						<?php echo form_error('Region_rec',' <div class="alert alert-danger" role="alert">','</div>') ?>
 					</div>
 					<div class="form-group">

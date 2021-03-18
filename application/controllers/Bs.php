@@ -16,6 +16,14 @@ class Bs extends Admin_Controller {
 		$this->data['page_title'] = 'BS';
 		$this->render_template('bs',$this->data);//index_us
 	}
+	public function index_bs_list()
+	{
+		$date=date('Y-m-d');
+		$this->data['data_user'] = $this->Model_bs->get_livreure($date);
+		$this->data['data_bs'] = $this->Model_bs->get_bs();
+		$this->data['page_title'] = 'List BS';
+		$this->render_template('list_bs',$this->data);//index_us
+	}
 	public function getDetaileBs()
 	{
 		$id=$this->input->post('id');

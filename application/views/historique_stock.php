@@ -83,9 +83,7 @@
 											?></td>
 										<td>
 											<a href="<?php ?>" class="btn btn-default" data-toggle="modal" data-toggle="modal" onClick="reply_click2(this.id)" data-target="#exampleModal" id="<?php echo $value->id_commande?>"><i class="fa fa-edit"></i></a>
-											<a href="<?php echo base_url('Stock/index_Print_commande') ?>"
-											   class="btn btn-default"
-											   id="<?php echo $value->id_commande?>" onClick="reply_click(this.id)"  ><i class="fa fa-print" aria-hidden="true"></i></a>
+											<a href="<?php echo base_url('Stock/index_Print_commande') ?>" class="btn btn-default" id="<?php echo $value->id_commande?>" onClick="reply_click(this.id)"  ><i class="fa fa-print" aria-hidden="true"></i></a>
 										</td>
 									</tr>
 								<?php endforeach ?>
@@ -217,9 +215,8 @@
 					res += "<td>" + moduleTwo[key].telph_rec + "</td>";
 					res += "<td>"+
 						"<a href='http://127.0.0.1/livretion/user/index_update_commande' class='btn btn-default' id='"+moduleTwo[key].id_commande+"'  ><i class='fa fa-edit'></i></a>" +
-						"<a href='#' class='btn btn-default' data-toggle='modal' data-toggle='modal' data-target='#exampleModal' id='"+moduleTwo[key].id_commande+"'><i class='fa fa-trash' ></i></a>\n"
-
-						+"</td>";
+						"<a href='http://127.0.0.1/livretion/Stock/index_Print_commande' class='btn btn-default' id='"+moduleTwo[key].id_commande+"' onClick='reply_click(this.id)'  ><i class='fa fa-print' aria-hidden='true'></i></a>";
+					res +="</td>";
 					res += "</tr>";
 				}
 			}

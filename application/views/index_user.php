@@ -53,7 +53,7 @@
 					<!-- /.box-header -->
 					<div class="box-body">
 						<table id="userTable" class="table table-bordered table-striped">
-
+<?php print_r($_SESSION) ?>
 							<thead>
 							<tr>
 								<th>Username</th>
@@ -81,6 +81,7 @@
 											   class="btn btn-default"
 											   id="<?php echo $value->id_commande?>" onClick="reply_click(this.id)"  ><i class="fa fa-edit"></i></a>
 											<a href="<?php ?>" class="btn btn-default" data-toggle="modal" data-toggle="modal" onClick="reply_click2(this.id)" data-target="#exampleModal" id="<?php echo $value->id_commande ?>"><i class="fa fa-trash" ></i></a>
+											<a href="<?php echo base_url('user/index_Print_commande') ?>" class="btn btn-default" id="<?php echo $value->id_commande?>" onClick="reply_click33(this.id)"  ><i class="fa fa-print" aria-hidden="true"></i></a>
 
 										</td>
 									</tr>
@@ -135,6 +136,10 @@
 	});
 </script>
 <script type="text/javascript">
+	function reply_click33(clicked_id)
+	{
+		$.post("add_print_id", {id:clicked_id});
+	}
 	function reply_click(clicked_id)
 	{
 		console.log(clicked_id);

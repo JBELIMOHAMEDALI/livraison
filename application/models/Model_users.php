@@ -93,4 +93,10 @@ class Model_users extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->result();
 	}
+	public function print_commande($id,$id2)
+	{
+		$sql="SELECT * from commande c join users u on c.id_user =u.id_user WHERE c.id_commande=".$id." and u.id_user =".$id2;
+		$query = $this->db->query($sql);
+		return $query->result();
+	}
 }

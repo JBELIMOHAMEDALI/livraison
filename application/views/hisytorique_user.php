@@ -55,12 +55,10 @@
 						<table id="userTable" class="table table-bordered table-striped">
 							<thead>
 							<tr>
-								<th>Username</th>
-								<th>Email</th>
-								<th>Name</th>
-								<th>Phone</th>
-								<th>Group</th>
-								<th>Action</th>
+								<th>Nom & Prenom Destinataire</th>
+								<th>Tel Destinataire</th>
+								<th>Adresse Destinataire</th>
+								<th>Etat</th>
 
 							</tr>
 							</thead>
@@ -70,16 +68,18 @@
 								foreach ($data_userALL as $value) :?>
 
 									<tr>
-										<td><?php echo $value->nom_rec?></td>
-										<td><?php echo $value->status ?></td>
-										<td><?php echo $value->Region_rec ?></td>
-										<td><?php  echo $value->adresse_rec ?></td>
+										<td><?php echo $value->nom_rec." ".$value->prenom_rec ?></td>
 										<td><?php echo $value->telph_rec ?></td>
-										<td>
-											<a href="<?php echo base_url('user/index_update_commande') ?>"
-											   class="btn btn-default"
-											   id="<?php echo $value->id_commande?>" onClick="reply_click(this.id)"  ><i class="fa fa-print" aria-hidden="true"></i></a>
-										</td>
+										<td><?php  echo $value->adresse_rec ?></td>
+										<td><?php
+											if($value->status=="0"){
+												echo "En Attente";
+											}else if($value->status=="1"){echo "En cours";
+											}else if($value->status=="2"){echo "Expédiée";
+											}else {echo "Retour";}
+
+											?></td>
+
 									</tr>
 								<?php endforeach ?>
 							<?php endif; ?>
@@ -182,18 +182,18 @@
 
 			if(moduleTwo.length){
 				for (let key = 0; key < moduleTwo.length; key++) {
+					var eta=""
+					if(moduleTwo[key].status=="0"){eta="En Attente";}
+					if(moduleTwo[key].status=="1"){eta=" En cours";}
+					if(moduleTwo[key].status=="2"){eta="Expédiée";}
+					if(moduleTwo[key].status=="3"){eta="Retour";}
 					res += "</tr>";
 					res += "<tr>";
-					res += "<td>" + moduleTwo[key].nom_rec + "</td>";
-					res += "<td>" + moduleTwo[key].status + "</td>";
-					res += "<td>" + moduleTwo[key].Region_rec + "</td>";
-					res += "<td>" + moduleTwo[key].adresse_rec + "</td>";
+					res += "<td>" + moduleTwo[key].nom_rec+" "+ + moduleTwo[key].prenom_rec+"</td>";
 					res += "<td>" + moduleTwo[key].telph_rec + "</td>";
-					res += "<td>"+
-						"<a href='http://127.0.0.1/livretion/user/index_update_commande' class='btn btn-default' id='"+moduleTwo[key].id_commande+"'  ><i class='fa fa-edit'></i></a>" +
-						"<a href='#' class='btn btn-default' data-toggle='modal' data-toggle='modal' data-target='#exampleModal' id='"+moduleTwo[key].id_commande+"'><i class='fa fa-trash' ></i></a>\n"
+					res += "<td>" + moduleTwo[key].adresse_rec + "</td>";
+					res += "<td>" + eta+ "</td>";
 
-						+"</td>";
 					res += "</tr>";
 				}
 			}

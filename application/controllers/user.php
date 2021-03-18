@@ -298,4 +298,14 @@ $this->redirectTo();
 		$prix=$this->input->post('prix');
 		return $this->model_users->UpdatePrixUser($idUser,$prix);
 	}
+	public function add_print_id()
+	{
+		$_SESSION["print01_commande_id"] = $_POST["id"];
+	}
+	public function index_Print_commande()
+	{
+		$this->data['page_title'] = 'Impression Commande';
+		$this->data['data_commande'] = $this->model_users->print_commande($_SESSION["print01_commande_id"],$_SESSION["id"]) ;
+		$this->render_template('print_commande',$this->data);
+	}
 }

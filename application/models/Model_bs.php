@@ -18,7 +18,7 @@ class Model_bs extends CI_Model
 	}
 	public function getDetaileBs($id)
 	{
-		$sql="select c.imagbarcode,c.nom_rec,c.prenom_rec,c.telph_rec,c.adresse_rec from bs_detaile bd join bs b 
+		$sql="select c.nom_article,c.id_commande ,c.imagbarcode,c.nom_rec,c.prenom_rec,c.telph_rec,c.adresse_rec from bs_detaile bd join bs b 
 				join commande c on bd.id_bs = b.id_bs and c.id_commande=bd.id_commande WHERE bd.id_bs =".$id;
 		$query = $this->db->query($sql);
 		return $query->result();

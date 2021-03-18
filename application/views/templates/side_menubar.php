@@ -30,13 +30,7 @@
 			<ul class="sidebar-menu" data-widget="tree">
 				<li id="dashboardMainMenu"><a href="<?php echo base_url('dashboard') ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
 				<li><a href="<?php echo base_url('bs') ?>"><i class="fa fa-clipboard" aria-hidden="true"></i> <span>BS </span></a></li>
-
-				<li class="treeview" id="mainProductNav">
-					<a href="#">
-						<i class="fa fa-history" aria-hidden="true"></i>
-						<span>List BS</span>
-					</a>
-				</li>
+				<li><a href="<?php echo base_url('bs/index_bs_list') ?>"><i class="fa fa-clipboard" aria-hidden="true"></i> <span>List BS </span></a></li>
 				<li class="treeview" id="mainProductNav">
 					<a href="#">
 						<i class="fa fa-history" aria-hidden="true"></i>

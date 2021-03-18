@@ -31,105 +31,174 @@
 
 					<!-- /.box-header -->
 					<div class="box-body" >
-						<br>
-						<div>
-						<div style="font-weight: bold;font-size: 25px;">AMAL EXPRESS</div>
-						<br><br>
-						<?php // print_r($data_commande)."<br />" ?>
-						<?php foreach ($data_commande as $value) :
-						$nom = $value->firstname." ".$value->lastname;
-						$nom_rec = $value->nom_rec." ".$value->prenom_rec;
-						$adres= $value->adresse;
-						$adres_rec= $value->adresse_rec;
-						$phone= $value->phone;
-						$phone_rec= $value->telph_rec;
-						$numFact= $value->id_commande;
-						$date=$value->date;
-						endforeach;?>
-						<br>
-						<div style=" display: flex;">
-						<div class="col" style="flex: 1; padding: 1em;font-size: 15px;font-weight: bold">
-							<p> Client :<br></p>
-							<div style="margin-left: 30px">
-								<table>
-									<tr>
-										<td><?php echo "Nom et Prenom :";?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-										<td><?php echo $nom;?></td>
-									</tr>
-									<tr>
-										<td><?php echo "Adresse : "; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-										<td><?php echo $adres;?></td>
-									</tr>
-									<tr>
-										<td><?php echo "Tel : (+216) ";?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-										<td><?php echo $phone;?></td>
-									</tr>
+						<div id="div1">
+						<div class="container" style="position: relative; ">
+							<div style="font-weight: bold;font-size: 25px;">AMAL EXPRESS</div>
+							<div class="firstLine" style=" position: relative;; display: flex;">
+								<div class="first_div_gouch" style="position: relative;width: 50%; display: inline-block;">
 
-								</table>
-								<br>
-								<br>
-								<table>
-									<tr>
-										<td>Facture N : </td>
-										<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $numFact?></td>
-									</tr>
-								</table>
-									<hr style="border-top: 1px solid black">
-								<table>
-									<tr>
-										<td>Date :</td>
-										<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $date?></td>
-									</tr>
+									<br><br>
+									<?php // print_r($data_commande)."<br />" ?>
+									<?php foreach ($data_commande as $value) :
+										$nom = $value->firstname." ".$value->lastname;
+										$nom_rec = $value->nom_rec." ".$value->prenom_rec;
+										$adres= $value->adresse;
+										$adres_rec= $value->adresse_rec;
+										$phone= $value->phone;
+										$phone_rec= $value->telph_rec;
+										$numFact= $value->id_commande;
+										$date=$value->date;
+										$qte=$value->qte;
+										$nom_article=$value->nom_article;
+										$prixOne=$value->prix_article;
 
-								</table>
+									endforeach;?>
+									<p> Client :<br></p>
+									<div style="margin-left: 30px">
+										<table>
+											<tr>
+												<td><?php echo "Nom et Prenom :";?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+												<td><?php echo $nom;?></td>
+											</tr>
+											<tr>
+												<td><?php echo "Adresse : "; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+												<td><?php echo $adres;?></td>
+											</tr>
+											<tr>
+												<td><?php echo "Tel : (+216) ";?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+												<td><?php echo $phone;?></td>
+											</tr>
+
+										</table>
+										<br>
+										<br>
+										<table>
+											<tr>
+												<td>Facture N : </td>
+												<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $numFact?></td>
+											</tr>
+										</table>
+										<hr style="border-top: 1px solid black">
+										<table>
+											<tr>
+												<td>Date :</td>
+												<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $date?></td>
+											</tr>
+
+										</table>
 
 
 
-								<hr style="border-top: 1px solid black">
+										<hr style="border-top: 1px solid black">
 
-								Matrecule Fiscale : 0123456+789
+										Matrecule Fiscale : 0123456+789
+									</div>
+
+
+								</div>
+								<div class="seconde_droit" style=" position: relative;width: 50%;display:inline-blocks;">
+
+<br><br>
+									<p> Client Destinataire :<br></p>
+									<div style="margin-left: 30px">
+										<table>
+											<tr>
+												<td><?php echo "Nom et Prenom :";?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+												<td><?php echo $nom_rec;?></td>
+											</tr>
+											<tr>
+												<td><?php echo "Adresse : "; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+												<td><?php echo $adres_rec;?></td>
+											</tr>
+											<tr>
+												<td><?php echo "Tel : (+216) ";?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+												<td><?php echo $phone_rec;?></td>
+											</tr>
+
+										</table>
+										<br>
+										<br>
+										Commande  : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo "--------------"?>
+
+										<hr style="border-top: 1px solid black">
+										<br>
+										Mode Payemont : jsjjsjsjsjjsjsjsj
+									</div>
+
+								</div>
 							</div>
-
-
-
-						</div>
-						<div class="col" style="flex: 1; padding: 1em;font-size: 15px;font-weight: bold"">
-
-							<p> Client Destinataire :<br></p>
-							<div style="margin-left: 30px">
-								<table>
+							<div class="bottom_div" style=" width: 100%;height: 300px;position: relative;">
+								<br>
+								<hr style="border-top: 1px solid black"><br>
+								<table border="1" style="border: 1px solid black;width: 100%;border-collapse: collapse;">
+									<thead>
+									<th style="border: 1px solid black;text-align: center ">Qte</th>
+									<th style="border: 1px solid black;text-align: center">Description</th>
+									<th style="border: 1px solid black;text-align: center">Prix Unter HT</th>
+									<th style="border: 1px solid black;text-align: center">TVA 7%</th>
+									<th style="border: 1px solid black;text-align: center" colspan="2">Totale</th>
+									</thead>
+									<tbody>
 									<tr>
-										<td><?php echo "Nom et Prenom :";?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-										<td><?php echo $nom_rec;?></td>
-									</tr>
-									<tr>
-										<td><?php echo "Adresse : "; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-										<td><?php echo $adres_rec;?></td>
-									</tr>
-									<tr>
-										<td><?php echo "Tel : (+216) ";?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-										<td><?php echo $phone_rec;?></td>
-									</tr>
+										<td style="text-align: center"><?php echo $qte;?></td>
+										<td style="text-align: center"><?php echo $nom_article;?></td>
+										<td style="text-align: center"><?php echo $prixOne;?></td>
+										<td style="text-align: center">0.7</td>
+										<td style="text-align: center"><?php
+											$somme=$prixOne*$qte;
+											$TVa=$somme*0.07;
+											$sommeTva=$somme+$TVa;
+											echo $somme ;
 
+											?></td>
+
+									</tr>
+									</tbody>
 								</table>
-								<br>
-								<br>
-								Commande  : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo "--------------"?>
+								<div style="text-align: left">
+									<br>
+									<br>
+								<hr style="border-top: 1px solid black; margin: 0px;">
 
-								<hr style="border-top: 1px solid black">
-								<br>
-								Mode Payemont : jsjjsjsjsjjsjsjsj
+								</div>
+
+								<div style="float:right;width: 30%">
+									<table  style="border: 1px solid black;width: 100%;border-collapse: collapse;">
+										<thead>
+										<th style="border: 1px solid black;text-align: center ">Prix Hors tax : </th>
+										<th style="border: 1px solid black;text-align: center"><?php echo "TND" .$somme;?></th>
+										</thead>
+										<tbody>
+										<tr>
+
+											<td rowspan="2" style="text-align: center ">TVA</td>
+										</tr>
+										<tr>
+										<td>TND.<?php echo $TVa ."<br />"?></td>
+
+										</tr>
+										<tr style="border: 1px solid black;text-align: center ">
+											<td style="text-align: center " >Total TTC</td>
+											<td><?php echo $sommeTva?></td>
+										</tr>
+										</tbody>
+									</table>
+								</div>
+
 							</div>
 						</div>
+						</div>
+						<div style="float:right;margin-right: 30px">
+							<button type="button" class="btn btn-warning" id="addEmploiModelBtn" onclick="printContent('div1')" name="addEmploiModelBtn">
+								<span class="glyphicon glyphicon-print" aria-hidden="true"></span> Impression</button>
 
-						<div>
-							<h1>jfghhfjfgjfhghfhj</h1>
+
 						</div>
 						</div>
-					</div>
 					<!-- /.box-body -->
 				</div>
 				<!-- /.box -->
+				</div>
 			</div>
 			<!-- col-md-12 -->
 		</div>
@@ -148,5 +217,13 @@
 
 	});
 </script>
-
+<script>
+	function printContent(el){
+		var restorepage = document.body.innerHTML;
+		var printcontent = document.getElementById(el).innerHTML;
+		document.body.innerHTML = printcontent;
+		window.print();
+		document.body.innerHTML = restorepage;
+	}
+</script>
 
