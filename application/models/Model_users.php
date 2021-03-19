@@ -86,7 +86,6 @@ class Model_users extends CI_Model
 	$status = $this->db->update('users');
 	return $status ;
 	}
-
 	public function get_Font()
 	{
 		$sql="select sum(c.qte*c.prix_article)as font,u.id_user from users u join commande c on c.id_user=u.id_user where c.status= 2 and u.type=0 GROUP by u.id_user";

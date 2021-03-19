@@ -35,7 +35,7 @@
 
 				<br /> <br />
 
-<?php //var_dump($data_font); ?>
+				<?php //var_dump($data_font); ?>
 				<div class="box">
 					<div class="box-header">
 						<h3 class="box-title">Manage Users</h3>
